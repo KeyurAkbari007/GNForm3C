@@ -333,6 +333,16 @@
                                             <span class="title">Receipt Type</span>
                                         </a>
                                     </li>
+                                     <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Master/MST_Student/MST_StudentList.aspx") %>' class="nav-link ">
+                                            <span class="title">Student</span>
+                                        </a>
+                                    </li> 
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Master/Branch_Intake/MST_BranchList.aspx") %>' class="nav-link ">
+                                            <span class="title">Branch Intake</span>
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
                             <li class="nav-item">

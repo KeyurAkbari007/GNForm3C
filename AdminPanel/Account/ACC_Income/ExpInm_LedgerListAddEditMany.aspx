@@ -165,6 +165,10 @@
                                                                     <td>
                                                                         <asp:TextBox ID="txtNote" CssClass="form-control" runat="server" Text='<%#Eval("Note") %>' PlaceHolder="Enter Remarks"></asp:TextBox>
                                                                     </td>
+                                                                    <td>
+                                                                                                            <asp:DropDownList ID="ddlIncomeTypeID" AutoPostBack="True" Enabled="false" CssClass="form-control select2me" runat="server"></asp:DropDownList>
+                                    <asp:RequiredFieldValidator ID="rfvIncomeTypeID" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlIncomeTypeID" ErrorMessage="Select Income Type" InitialValue="-99"></asp:RequiredFieldValidator>
+                                                                    </td>
                                                                 </tr>
                                                                 <%-- END Table Rows --%>
                                                             </ItemTemplate>
@@ -178,7 +182,7 @@
                                                 <div class="col-md-offset-1 col-md-9">
 
                                                     <asp:LinkButton ID="btnAdd" runat="server" OnClick="btnAdd_Click" SkinID="lbtnAddRow" Visible="true">
- </asp:LinkButton>
+                                                    </asp:LinkButton>
                                                     <asp:LinkButton ID="btnSave" runat="server" CssClass="btn green" SkinID="btnSave" OnClick="btnSave_Click" Text="Save" />
                                                     <asp:HyperLink ID="hlCancel" runat="server" SkinID="hlCancel" NavigateUrl="~/AdminPanel/Account/ACC_Income/ACC_IncomeList.aspx"></asp:HyperLink>
                                                 </div>
