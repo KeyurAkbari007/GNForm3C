@@ -450,17 +450,17 @@ namespace GNForm3C.DAL
         }
 
         #endregion DeleteMultipleOperation
-        public DataTable SelectShow(SqlInt32 HospitalID, SqlInt32 FinYearID, SqlInt32 IncomeTypeID)
+        public DataTable SelectShow(SqlInt32 HospitalID,SqlInt32 FinYearID)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_ACC_Income_SelectShow");
                 sqlDB.AddInParameter(dbCMD, "@HospitalID", SqlDbType.Int, HospitalID);
-                sqlDB.AddInParameter(dbCMD, "@FinYearID", SqlDbType.Int, FinYearID);
-                sqlDB.AddInParameter(dbCMD, "@IncomeTypeID", SqlDbType.Int, IncomeTypeID);
+				sqlDB.AddInParameter(dbCMD, "@FinYearID", SqlDbType.Int, FinYearID);
+				//sqlDB.AddInParameter(dbCMD, "@IncomeTypeID", SqlDbType.Int, IncomeTypeID);
 
-                DataTable dtACC_IncomeShow = new DataTable("PR_ACC_Income_SelectShow");
+				DataTable dtACC_IncomeShow = new DataTable("PR_ACC_Income_SelectShow");
 
                 DataBaseHelper DBH = new DataBaseHelper();
                 DBH.LoadDataTable(sqlDB, dbCMD, dtACC_IncomeShow);

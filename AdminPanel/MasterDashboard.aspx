@@ -96,7 +96,8 @@
                             <div class="form-body">
                                 <div class="row">
                                     <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat dashboard-stat-v2 blue" href="Account/ACC_Income/ACC_IncomeList.aspx">
+
+                                        <a class="dashboard-stat dashboard-stat-v2 blue" href='<%= "Account/ACC_Income/ACC_IncomeList.aspx?HospitalID="+ GNForm3C.CommonFunctions.EncryptBase64(ddlHospitalID.SelectedValue.ToString())%>'>
                                             <div class="visual">
                                                 <i class="fa fa-comments"></i>
                                             </div>
@@ -109,7 +110,7 @@
                                         </a>
                                     </div>
                                     <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat dashboard-stat-v2 red" href="Account/ACC_Expense/ACC_ExpenseList.aspx">
+                                        <a class="dashboard-stat dashboard-stat-v2 red" href='<%= "Account/ACC_Expense/ACC_ExpenseList.aspx?HospitalID="+ GNForm3C.CommonFunctions.EncryptBase64(ddlHospitalID.SelectedValue.ToString())%>'>
                                             <div class="visual">
                                                 <i class="fa fa-list"></i>
                                             </div>
@@ -122,7 +123,7 @@
                                         </a>
                                     </div>
                                     <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                        <a class="dashboard-stat dashboard-stat-v2 blue" href="Account/ACC_Expense/ACC_TransactionList.aspx">
+                                        <a class="dashboard-stat dashboard-stat-v2 blue" href="Account/ACC_Transaction/ACC_TransactionList.aspx">
                                             <div class="visual">
                                                 <i class="fa fa-globe"></i>
                                             </div>

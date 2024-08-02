@@ -168,10 +168,10 @@ namespace GNForm3C.BAL
 
         #endregion DeleteMultipleOperation
 
-        public DataTable SelectShow(SqlInt32 HospitalID, SqlInt32 FinYearID, SqlInt32 IncomeTypeID)
+        public DataTable SelectShow(SqlInt32 HospitalID,SqlInt32 FinYearID)
         {
             ACC_IncomeDAL dalAcc_account = new ACC_IncomeDAL();
-            return dalAcc_account.SelectShow(HospitalID, FinYearID, IncomeTypeID);
+            return dalAcc_account.SelectShow(HospitalID, FinYearID);
         }
 
     }

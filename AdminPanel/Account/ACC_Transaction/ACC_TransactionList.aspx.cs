@@ -243,6 +243,7 @@ public partial class AdminPanel_ACC_Transaction_ACC_TransactionList : System.Web
             CommonFunctions.BindPageList(0, 0, PageNo, PageDisplaySize, DisplayIndex, rpPagination, liPrevious, lbtnPrevious, liFirstPage, lbtnFirstPage, liNext, lbtnNext, liLastPage, lbtnLastPage);
             
             ucMessage.ShowError(CommonMessage.NoRecordFound());
+
         }
     }
 

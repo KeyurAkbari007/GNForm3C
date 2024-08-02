@@ -51,12 +51,12 @@
                                     <asp:Label ID="lblFinYearID" runat="server" Text="Financial Year"></asp:Label>
                                 </label>
                                 <div class="col-md-5">
-                                    <asp:DropDownList ID="ddlFinYearID" CssClass="form-control select2me" runat="server" AutoPostBack="True" OnSelectedIndexChanged="ddlFinYearID_SelectedIndexChanged"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlFinYearID" CssClass="form-control select2me" runat="server" AutoPostBack="True"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvFinYearID" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlFinYearID" ErrorMessage="Select Financial Year" InitialValue="-99"></asp:RequiredFieldValidator>
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <%-- <div class="form-group">
                                 <label class="col-md-3 control-label">
                                     <span class="required">*</span>
                                     <asp:Label ID="lblIncomeTypeID" runat="server" Text="Income Type"></asp:Label>
@@ -65,7 +65,7 @@
                                     <asp:DropDownList ID="ddlIncomeTypeID" AutoPostBack="True" Enabled="false" CssClass="form-control select2me" runat="server"></asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="rfvIncomeTypeID" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlIncomeTypeID" ErrorMessage="Select Income Type" InitialValue="-99"></asp:RequiredFieldValidator>
                                 </div>
-                            </div>
+                            </div>--%>
 
                             <div class="form-actions">
                                 <div class="row">
@@ -110,7 +110,7 @@
                                         <div class="col-md-12">
                                             <div id="TableContent">
                                                 <table class="table table-bordered table-advanced table-striped table-hover" id="sample_1">
-                                                    <%-- Table Header --%>
+
                                                     <thead>
                                                         <tr class="TRDark">
                                                             <th class="text-center" style="width: 20px;">
@@ -133,12 +133,16 @@
                                                             <th>
                                                                 <asp:Label ID="lbhRemarks" runat="server" Text="Remarks"></asp:Label>
                                                             </th>
+
+                                                            <th>
+                                                                <asp:Label ID="lblincometypeddl" runat="server" Text="IncomeType"></asp:Label>
+                                                            </th>
                                                         </tr>
                                                     </thead>
                                                     <%-- END Table Header --%>
 
                                                     <tbody>
-                                                        <asp:Repeater ID="rpData" runat="server">
+                                                        <asp:Repeater ID="rpData" runat="server" OnItemDataBound="rpData_ItemDataBound">
                                                             <ItemTemplate>
                                                                 <%-- Table Rows --%>
                                                                 <tr class="odd gradeX">
@@ -165,12 +169,12 @@
                                                                     <td>
                                                                         <asp:TextBox ID="txtNote" CssClass="form-control" runat="server" Text='<%#Eval("Note") %>' PlaceHolder="Enter Remarks"></asp:TextBox>
                                                                     </td>
+
                                                                     <td>
-                                                                                                            <asp:DropDownList ID="ddlIncomeTypeID" AutoPostBack="True" Enabled="false" CssClass="form-control select2me" runat="server"></asp:DropDownList>
-                                    <asp:RequiredFieldValidator ID="rfvIncomeTypeID" SetFocusOnError="True" runat="server" Display="Dynamic" ControlToValidate="ddlIncomeTypeID" ErrorMessage="Select Income Type" InitialValue="-99"></asp:RequiredFieldValidator>
+                                                                        <asp:DropDownList ID="ddlIncomeTypeID" AutoPostBack="True" Enabled="false" CssClass="form-control select2me" runat="server"></asp:DropDownList>
                                                                     </td>
                                                                 </tr>
-                                                                <%-- END Table Rows --%>
+
                                                             </ItemTemplate>
                                                         </asp:Repeater>
                                                     </tbody>

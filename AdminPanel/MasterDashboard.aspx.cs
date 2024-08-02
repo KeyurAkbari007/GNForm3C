@@ -106,6 +106,9 @@ public partial class AdminPanel_MasterDashboard : System.Web.UI.Page
         #endregion NavigateLogic
 
         #region 11.5 Total Income/Expense
+
+
+        ViewState["hospitalID"]= HospitalID;
         DEF_CountBAL balDEF_Count = new DEF_CountBAL();
 
         DataTable dtCount = balDEF_Count.SelectTotalIncomeExpense(HospitalID);
@@ -192,6 +195,8 @@ public partial class AdminPanel_MasterDashboard : System.Web.UI.Page
             TreatmentWiseSummary.Visible = false;
         }
         Panel3.Visible = true;
+
+      
     }
     #endregion 14.0 Show Button Event
 

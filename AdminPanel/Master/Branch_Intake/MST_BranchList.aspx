@@ -64,7 +64,7 @@
                             <div class="row">
                                 <div class="col-md-6 text-right">
                                     <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-primary" />
-                                    <%--                                <asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CssClass="btn btn-secondary" />--%>
+                                    <%--<asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CssClass="btn btn-secondary" />--%>
                                 </div>
                             </div>
                         </div>

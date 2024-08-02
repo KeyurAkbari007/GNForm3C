@@ -41,6 +41,12 @@ public partial class AdminPanel_ACC_Expense_ACC_ExpenseList : System.Web.UI.Page
 
             #endregion 12.1 DropDown List Fill Section
 
+
+            if (Request.QueryString["HospitalID"] != null)
+            {
+                ddlHospitalID.SelectedValue = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]).ToString();
+                ddlHospitalIDChanged();
+            }
             Search(1);
 
             #region 12.2 Set Default Value
@@ -426,6 +432,11 @@ public partial class AdminPanel_ACC_Expense_ACC_ExpenseList : System.Web.UI.Page
     #region 23.0 Fill Finyear Dropdown From Hopital
     protected void ddlHospitalID_SelectedIndexChanged1(object sender, EventArgs e)
     {
+        ddlHospitalIDChanged();
+    }
+    #endregion 23.0 Fill Finyear Dropdown From Hopital
+    private void ddlHospitalIDChanged()
+    {
         if (ddlHospitalID.SelectedIndex > 0)
         {
             ddlExpenseTypeID.SelectedIndex = 0;
@@ -444,7 +455,7 @@ public partial class AdminPanel_ACC_Expense_ACC_ExpenseList : System.Web.UI.Page
 
         }
     }
-    #endregion 23.0 Fill Finyear Dropdown From Hopital
+
 
     #region 24.0 Fill ExpenseType Dropdown From Finyear
     protected void ddlFinYearID_SelectedIndexChanged1(object sender, EventArgs e)

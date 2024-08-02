@@ -46,9 +46,13 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
             lblSearchHeader.Text = CV.SearchHeaderText;
             lblSearchResultHeader.Text = CV.SearchResultHeaderText;
             upr.DisplayAfter = CV.UpdateProgressDisplayAfter;
-			
-            #endregion 12.2 Set Default Value
 
+            #endregion 12.2 Set Default Value
+            if (Request.QueryString["HospitalID"] != null)
+            {
+                ddlHospitalID.SelectedValue = CommonFunctions.DecryptBase64Int32(Request.QueryString["HospitalID"]).ToString();
+                ddlHospitalIDChanged();
+            }
             Search(1);
 
 	        #region 12.3 Set Help Text
@@ -77,7 +81,7 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
         CommonFillMethods.FillDropDownListHospitalID(ddlHospitalID);
 
         ddlFinYearID.Items.Insert(0, new ListItem("Select Fin Year", "-99"));
-        ddlIncomeTypeID.Items.Insert(0, new ListItem("Select Fin Year", "-99"));
+        ddlIncomeTypeID.Items.Insert(0, new ListItem("Select Income Type", "-99"));
         CommonFunctions.GetDropDownPageSize(ddlPageSizeBottom);
         ddlPageSizeBottom.SelectedValue = PageRecordSize.ToString();
     }
@@ -112,11 +116,11 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
         Int32 TotalRecords = 0;
 		Int32 TotalPages = 1;
 
-		#endregion Parameters
-		
+        #endregion Parameters
+
         #region Gather Data
-        
-		if (ddlIncomeTypeID.SelectedIndex > 0)
+    
+        if (ddlIncomeTypeID.SelectedIndex > 0)
 			IncomeTypeID = Convert.ToInt32(ddlIncomeTypeID.SelectedValue);
 
 		if (txtAmount.Text.Trim() != String.Empty)
@@ -420,9 +424,15 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
     #region 23.0 Fill Finyear Dropdown From Hopital
     protected void ddlHospitalID_SelectedIndexChanged(object sender, EventArgs e)
     {
-        if(ddlHospitalID.SelectedIndex >0)
+        ddlHospitalIDChanged();
+    }
+    #endregion 23.0 Fill Finyear Dropdown From Hopital
+
+    private void ddlHospitalIDChanged()
+    {
+        if (ddlHospitalID.SelectedIndex > 0)
         {
-            ddlIncomeTypeID.SelectedIndex = 0;  
+            ddlIncomeTypeID.SelectedIndex = 0;
             SqlInt32 HospitalID = SqlInt32.Null;
 
             HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
@@ -438,7 +448,7 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
 
         }
     }
-    #endregion 23.0 Fill Finyear Dropdown From Hopital
+
 
     #region 24.0 Fill IncomeType Dropdown From Finyear
     protected void ddlFinYearID_SelectedIndexChanged(object sender, EventArgs e)
