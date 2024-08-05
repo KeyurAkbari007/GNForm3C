@@ -2,12 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class AdminPanel_Master_MST_Student_MST_BranchList : System.Web.UI.Page
+public partial class AdminPanel_Master_MST_Student_MST_BranchIntake : System.Web.UI.Page
 {
     #region Variables
 
@@ -31,7 +28,7 @@ public partial class AdminPanel_Master_MST_Student_MST_BranchList : System.Web.U
 
         if (!Page.IsPostBack)
         {
-            BindData();
+            Search(1);
 
             #region Set Help Text
             //ucHelp.ShowHelp("Help Text will be shown here");
@@ -41,146 +38,168 @@ public partial class AdminPanel_Master_MST_Student_MST_BranchList : System.Web.U
 
     #endregion Page Load event
 
-    private void BindData()
+    #region 15.0 Search
+
+    #region 15.1 Button Search Click Event
+
+    protected void btnSearch_Click(object sender, EventArgs e)
     {
+        Search(1);
+    }
+
+    #endregion 15.1 Button Search Click Event
+
+    #region 15.2 Search Function
+
+    private void Search(int PageNo)
+    {
+
         MST_BranchIntakeBAL balMST_BranchIntake = new MST_BranchIntakeBAL();
         DataTable dt = balMST_BranchIntake.GetBranchIntakeData();
 
-        // Dynamically create table headers
-        var headers = dt.Columns.Cast<DataColumn>()
-                        .Where(c => c.ColumnName != "Branch")
-                        .Select(c => c.ColumnName).ToList();
 
-        // Convert headers to a comma-separated string and store in hidden field
-        hfHeaders.Value = string.Join(",", headers);
-
-        // Clear existing columns
-        gvBranches.Columns.Clear();
-
-        // Add the Branch column
-        gvBranches.Columns.Add(new BoundField
+        if (dt != null && dt.Rows.Count > 0)
         {
-            DataField = "Branch",
-            HeaderText = "Branch"
-        });
 
-        // Add dynamic columns
-        foreach (var header in headers)
-        {
-            gvBranches.Columns.Add(new TemplateField
-            {
-                HeaderText = header,
-                ItemTemplate = new DynamicTemplate(header)
-            });
+            rpAddmissionYearHead.DataSource = CommonFunctions.ColumnOfDataTable(dt);
+            rpAddmissionYearHead.DataBind();
+            rpIntakeData.DataSource = dt;
+            rpIntakeData.DataBind();
+
         }
-
-        // Bind data to GridView
-        gvBranches.DataSource = dt;
-        gvBranches.DataBind();
-    }
-
-
-
-    protected void btnSave_Click(object sender, EventArgs e)
-    {
-        MST_BranchIntakeBAL balMST_BranchIntake = new MST_BranchIntakeBAL();
-        var headers = hfHeaders.Value.Split(','); // Using hfHeaders.Value to get headers
-
-        foreach (GridViewRow row in gvBranches.Rows)
+        else
         {
-            if (row.RowType == DataControlRowType.DataRow)
-            {
-                string branch = ((BoundField)gvBranches.Columns[0]).DataField; // Assuming 'Branch' is the first column
 
-                Dictionary<int, int> intakeData = new Dictionary<int, int>();
-
-                foreach (var header in headers)
-                {
-                    var textBox = (TextBox)row.FindControl("txt" + header);
-                    if (textBox != null)
-                    {
-                        int year;
-                        if (int.TryParse(header, out year))
-                        {
-                            int intakeValue;
-                            if (int.TryParse(textBox.Text, out intakeValue))
-                            {
-                                intakeData[year] = intakeValue;
-                            }
-                        }
-                    }
-                }
-
-                balMST_BranchIntake.SaveBranchIntakeData(branch, intakeData);
-            }
-        }
-
-        BindData();
-    }
-
-
-
-
-
-
-
-    protected void rptBranches_ItemCommand(object source, RepeaterCommandEventArgs e)
-    {
-        if (e.CommandName == "DeleteRecord")
-        {
-            string branch = e.CommandArgument.ToString();
-            MST_BranchIntakeBAL balMST_BranchIntake = new MST_BranchIntakeBAL();
-            balMST_BranchIntake.DeleteBranchIntakeData(branch);
-            BindData();
+            ucMessage.ShowError(CommonMessage.NoRecordFound());
         }
     }
 
-    protected void rptBranches_ItemDataBound(object sender, RepeaterItemEventArgs e)
+    #endregion 15.2 Search Function
+
+    #region 15.3 rpIntake_ItemDataBound
+    protected void rpIntake_ItemDataBound(object sender, RepeaterItemEventArgs e)
     {
         if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
         {
-            var headers = hfHeaders.Value.Split(',');
-            var item = (RepeaterItem)e.Item;
+            Repeater rpAddmissionYearBody = (Repeater)e.Item.FindControl("rpAddmissionYearBody");
+            DataRowView drv = (DataRowView)e.Item.DataItem;
 
-            foreach (var header in headers)
+            if (rpAddmissionYearBody != null && drv != null)
             {
-                var textBox = (TextBox)item.FindControl("txt" + header);
-                if (textBox != null)
+                // Retrieve column names excluding the "Branch" column
+                DataTable dt = drv.DataView.Table;
+                List<string> yearColumns = CommonFunctions.ColumnOfDataTable(dt).GetRange(1, dt.Columns.Count - 1);
+
+                // Create a data source with year and intake pairs for binding
+                List<YearIntakePair> yearIntakePairs = new List<YearIntakePair>();
+                foreach (string year in yearColumns)
                 {
-                    // Set the text box value from data source
-                    textBox.Text = DataBinder.Eval(e.Item.DataItem, header).ToString() ?? string.Empty;
+                    yearIntakePairs.Add(new YearIntakePair
+                    {
+                        Year = year,
+                        Intake = drv[year].ToString()
+                    });
                 }
+
+                rpAddmissionYearBody.DataSource = yearIntakePairs;
+                rpAddmissionYearBody.DataBind();
             }
         }
     }
 
-
-
-
-
-    //protected void btnClear_Click(object sender, EventArgs e)
-    //{
-    //    foreach (RepeaterItem item in rptBranches.Items)
-    //    {
-    //        ((TextBox)item.FindControl("txt2022")).Text = string.Empty;
-    //        ((TextBox)item.FindControl("txt2023")).Text = string.Empty;
-    //        ((TextBox)item.FindControl("txt2024")).Text = string.Empty;
-    //    }
-    //}
-    protected void gvBranches_RowDataBound(object sender, GridViewRowEventArgs e)
+    // Helper class to store year and intake pairs
+    public class YearIntakePair
     {
-        if (e.Row.RowType == DataControlRowType.DataRow)
+        public string Year { get; set; }
+        public string Intake { get; set; }
+    }
+
+
+    protected string BindIntakeData(string year, object dataItem)
+    {
+        DataRowView rowView = dataItem as DataRowView;
+        if (rowView != null && rowView.Row.Table.Columns.Contains(year))
         {
-            var headers = hfHeaders.Value.Split(',');
-            foreach (var header in headers)
+            return rowView[year].ToString();
+        }
+        return string.Empty;
+    }
+
+    #endregion 15.3 rpIntake_ItemDataBound
+
+    #endregion 15.0 Search
+
+    #region 16.0 MST_BranchIntake Add/Edit
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        MST_BranchIntakeBAL balMST_BranchIntake = new MST_BranchIntakeBAL();
+
+        foreach (RepeaterItem item in rpIntakeData.Items)
+        {
+            Label lblBranch = (Label)item.FindControl("lblBranch");
+
+            if (lblBranch != null)
             {
-                var textBox = (TextBox)e.Row.FindControl("txt" + header);
-                if (textBox != null)
+                string branch = lblBranch.Text;
+                Repeater rpAddmissionYearBody = (Repeater)item.FindControl("rpAddmissionYearBody");
+
+                if (rpAddmissionYearBody != null)
                 {
-                    textBox.Text = DataBinder.Eval(e.Row.DataItem, header).ToString() ?? string.Empty;
+                    Dictionary<int, int> yearIntakeData = new Dictionary<int, int>();
+
+                    foreach (RepeaterItem yearItem in rpAddmissionYearBody.Items)
+                    {
+                        TextBox txtIntake = (TextBox)yearItem.FindControl("txtIntake");
+                        Label lblYear = (Label)yearItem.FindControl("lblYear");
+
+                        if (txtIntake != null && lblYear != null)
+                        {
+                            int intake;
+                            int year;
+
+                            if (int.TryParse(txtIntake.Text, out intake) && int.TryParse(lblYear.Text, out year))
+                            {
+                                yearIntakeData[year] = intake;
+                            }
+                        }
+                    }
+
+                    // Save the intake data for the branch
+                    balMST_BranchIntake.SaveBranchIntakeData(branch, yearIntakeData);
+                }
+            }
+        }
+
+        // Refresh the data
+        Search(1);
+    }
+
+    #endregion 16.0 MST_BranchIntake Add/Edit
+
+    #region 17.0 Clear Button
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        foreach (RepeaterItem item in rpIntakeData.Items)
+        {
+            Repeater rpAddmissionYearBody = (Repeater)item.FindControl("rpAddmissionYearBody");
+
+            if (rpAddmissionYearBody != null)
+            {
+                foreach (RepeaterItem yearItem in rpAddmissionYearBody.Items)
+                {
+                    TextBox txtIntake = (TextBox)yearItem.FindControl("txtIntake");
+
+                    if (txtIntake != null)
+                    {
+                        txtIntake.Text = string.Empty;
+                    }
                 }
             }
         }
     }
+    #endregion  17.0 Clear Button
+
+
+
 
 }

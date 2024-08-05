@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default/MasterPage.master" AutoEventWireup="true" CodeFile="MST_BranchList.aspx.cs" Inherits="AdminPanel_Master_MST_Student_MST_BranchList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default/MasterPage.master" AutoEventWireup="true" CodeFile="MST_BranchList.aspx.cs" Inherits="AdminPanel_Master_MST_Student_MST_BranchIntake" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
@@ -6,15 +6,14 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="cphPageHeader" runat="Server">
     <asp:Label ID="lblPageHeader_XXXXX" runat="server" Text="Branch Intake"></asp:Label>
     <small>
-        <asp:Label ID="lblPageHeaderInfo_XXXXX" runat="server" Text="Master"></asp:Label>
-    </small>
+        <asp:Label ID="lblPageHeaderInfo_XXXXX" runat="server" Text="Master"></asp:Label></small>
     <span class="pull-right">
         <small>
             <asp:HyperLink ID="hlShowHelp" SkinID="hlShowHelp" runat="server"></asp:HyperLink>
         </small>
     </span>
 </asp:Content>
-
+    
 <asp:Content ID="Content3" ContentPlaceHolderID="cphBreadcrumb" runat="Server">
     <li>
         <i class="fa fa-home"></i>
@@ -33,7 +32,6 @@
 
     <asp:ScriptManager ID="sm" runat="server"></asp:ScriptManager>
     <asp:HiddenField ID="hfHeaders" runat="server" />
-
     <%-- List --%>
     <asp:UpdatePanel ID="upList" runat="server" UpdateMode="Conditional">
         <ContentTemplate>
@@ -56,15 +54,50 @@
                         <div class="portlet-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <asp:GridView ID="gvBranches" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered table-advanced table-striped table-hover"
-                                        OnRowDataBound="gvBranches_RowDataBound">
-                                    </asp:GridView>
+                                    <div id="TableContent">
+                                        <table class="table table-bordered table-advanced table-striped " id="tblIncomeList">
+                                            <%-- Table Header --%>
+                                            <thead>
+                                                <tr class="TRDark">
+                                                    <asp:Repeater ID="rpAddmissionYearHead" runat="server">
+                                                        <ItemTemplate>
+                                                            <th class="text-center">
+                                                                <asp:Label ID="lblMonth" runat="server" Text='<%#Container.DataItem %>'></asp:Label>
+                                                            </th>
+                                                        </ItemTemplate>
+                                                    </asp:Repeater>
+
+                                                </tr>
+                                            </thead>
+                                            <%-- END Table Header --%>
+
+                                            <tbody>
+                                                <asp:Repeater ID="rpIntakeData" runat="server" OnItemDataBound="rpIntake_ItemDataBound">
+                                                    <ItemTemplate>
+                                                        <tr>
+                                                            <td>
+                                                                <asp:Label ID="lblBranch" runat="server" Text='<%# Eval("Branch") %>'></asp:Label>
+                                                            </td>
+                                                            <asp:Repeater ID="rpAddmissionYearBody" runat="server">
+                                                                <ItemTemplate>
+                                                                    <td class="text-right">
+                                                                        <asp:Label ID="lblYear" runat="server" Text='<%# Eval("Year") %>' Visible="false"></asp:Label>
+                                                                        <asp:TextBox ID="txtIntake" CssClass="form-control" runat="server" Text='<%# Eval("Intake") %>' />
+                                                                    </td>
+                                                                </ItemTemplate>
+                                                            </asp:Repeater>
+                                                        </tr>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6 text-right">
-                                    <asp:Button ID="btnSave" runat="server" Text="Save" OnClick="btnSave_Click" CssClass="btn btn-primary" />
-                                    <%--<asp:Button ID="btnClear" runat="server" Text="Clear" OnClick="btnClear_Click" CssClass="btn btn-secondary" />--%>
+                                    <asp:Button ID="btnSave" runat="server" Text="save" OnClick="btnSave_Click" CssClass="btn btn-primary" />
+                                    <asp:Button ID="btnClear" runat="server" Text="clear" OnClick="btnClear_Click" CssClass="btn btn-secondary" />
                                 </div>
                             </div>
                         </div>
@@ -75,20 +108,22 @@
         </ContentTemplate>
         <Triggers>
             <asp:AsyncPostBackTrigger ControlID="btnSave" EventName="Click" />
-            <%--        <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" />--%>
+            <asp:AsyncPostBackTrigger ControlID="btnClear" EventName="Click" />
         </Triggers>
     </asp:UpdatePanel>
-
     <%-- END List --%>
 
-    <%-- Loading --%>
+    <%-- Loading  --%>
     <asp:UpdateProgress ID="upr" runat="server">
         <ProgressTemplate>
             <div class="divWaiting">
                 <asp:Label ID="lblWait" runat="server" Text=" Please wait... " />
-                <asp:Image ID="imgWait" runat="server" SkinID="imgWait" />
+                <asp:Image ID="imgWait" runat="server" SkinID="UpdatePanelLoding" />
             </div>
         </ProgressTemplate>
     </asp:UpdateProgress>
-    <%-- Loading End --%>
+    <%-- END Loading  --%>
+</asp:Content>
+
+<asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">
 </asp:Content>

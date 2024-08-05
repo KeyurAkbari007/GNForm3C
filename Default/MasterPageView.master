@@ -5,10 +5,69 @@
 <%--<html xmlns="http://www.w3.org/1999/xhtml">--%>
 <head runat="server">
     <title></title>
- 
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/font-awesome/css/font-awesome.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/simple-line-icons/simple-line-icons.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap/css/bootstrap.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS -->
+
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-fileinput/bootstrap-fileinput.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-daterangepicker/daterangepicker.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-timepicker/css/bootstrap-timepicker.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/select2/css/select2.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/select2/css/select2-bootstrap.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/datatables/datatables.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/plugins/animate/animate.css?V=2_20200225") %>" rel="stylesheet" />
+
+    <!-- END PAGE LEVEL PLUGINS -->
+
+
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/css/components.min.css?V=2_20200225") %>" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/global/css/plugins.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <!-- END THEME GLOBAL STYLES -->
+
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="<%=ResolveClientUrl("~/Default/assets/layouts/layout/css/layout.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/layouts/layout/css/themes/darkblue.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="<%=ResolveClientUrl("~/Default/assets/layouts/layout/css/custom.min.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <!-- END THEME LAYOUT STYLES -->
+
+    <!-- BEGIN CUSTOM STYLES -->
+    <link href="<%=ResolveClientUrl("~/Default/CSS/gn-globals.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/CSS/GNCustom.css?V=2_20200225?V=2") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/CSS/gnmis.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/CSS/_modal.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <link href="<%=ResolveClientUrl("~/Default/CSS/GNColor.css?V=2_20200225") %>" rel="stylesheet" type="text/css" />
+    <!-- END CUSTOM STYLES -->
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+
+    <style>
+        .page-header.navbar .menu-toggler.sidebar-toggler {
+            float: right;
+            margin: 0 0 0 0 !important;
+        }
+    </style>
+
+
 </head>
 <%--<body style="background-color: transparent">--%>
     <form id="form1" runat="server">

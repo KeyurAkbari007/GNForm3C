@@ -44,7 +44,7 @@ public partial class AdminPanel_Master_MST_Student_MST_StudentList : System.Web.
 
             lblSearchHeader.Text = CV.SearchHeaderText;
             lblSearchResultHeader.Text = CV.SearchResultHeaderText;
-            upr.DisplayAfter = CV.UpdateProgressDisplayAfter;
+            //upr.DisplayAfter = CV.UpdateProgressDisplayAfter;
 
             #endregion 12.2 Set Default Value
 

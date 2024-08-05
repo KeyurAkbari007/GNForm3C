@@ -621,6 +621,18 @@ namespace GNForm3C
             return cssclass;
         }
 
+        #region Column of DataTable
+        public static List<String> ColumnOfDataTable(DataTable dt)
+        {
+            var columnNames = new List<string>();
+            foreach (DataColumn column in dt.Columns)
+            {
+                columnNames.Add(column.ColumnName);
+            }
+
+            return columnNames;
+        }
+        #endregion Column of DataTable
         public static string GetStatusLabelChequeReturnCss(bool Status)
         {
             string cssclass = string.Empty;

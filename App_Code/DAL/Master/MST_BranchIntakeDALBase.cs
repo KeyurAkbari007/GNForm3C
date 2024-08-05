@@ -193,7 +193,7 @@ namespace GNForm3C
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
-                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_BranchIntake_Save");
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_BranchIntake_InsertUpdate");
 
                 sqlDB.AddInParameter(dbCMD, "@Branch", DbType.String, branch);
                 sqlDB.AddInParameter(dbCMD, "@Year", DbType.Int32, year);

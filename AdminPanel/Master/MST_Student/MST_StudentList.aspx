@@ -244,7 +244,7 @@
                                                             <td>
                                                                 <asp:HyperLink ID="hlViewStudentID" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/MST_StudentView.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("StudentName") %></asp:HyperLink>
                                                             </td>
-                                                            
+
                                                             <td>
                                                                 <%#Eval("EnrollmentNo") %>
                                                             </td>
@@ -281,6 +281,7 @@
                                                                     CommandName="DeleteRecord"
                                                                     CommandArgument='<%#Eval("StudentID") %>'>
                                                                 </asp:LinkButton>
+                                                                <asp:HyperLink ID="hlPopUpEdit" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/STU_StudentAddEditPopUp.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
                                                             </td>
                                                         </tr>
                                                         <%-- END Table Rows --%>

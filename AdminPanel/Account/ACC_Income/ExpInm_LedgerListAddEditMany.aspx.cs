@@ -32,7 +32,7 @@ namespace GNForm3C
         }
         #endregion LoadDropDropwn
 
-        //#region 12.0 ddlHospitalID_SelectedIndexChanged
+        #region 12.0 ddlHospitalID_SelectedIndexChanged
         //protected void ddlHospitalID_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    SqlInt32 hospitalID = SqlInt32.Null;
@@ -46,9 +46,9 @@ namespace GNForm3C
         //    ddlIncomeTypeID.Items.Clear();
         //    ddlIncomeTypeID.Enabled = false;
         //}
-        //#endregion ddlHospitalID_SelectedIndexChanged
+        #endregion ddlHospitalID_SelectedIndexChanged
 
-        //#region 13.0 onchangeEventOnselectedDropDownFinYear
+        #region 13.0 onchangeEventOnselectedDropDownFinYear
         //protected void ddlFinYearID_SelectedIndexChanged(object sender, EventArgs e)
         //{
         //    // Initialize variables for the selected values
@@ -76,7 +76,7 @@ namespace GNForm3C
         //        ddlIncomeTypeID.Enabled = false;
         //    }
         //}
-        //#endregion 13.0 onchangeEventOnselectedDropDownFinYear
+        #endregion 13.0 onchangeEventOnselectedDropDownFinYear
 
         #region 14.0 Show Button Event
         protected void btnShow_Click(object sender, EventArgs e)
@@ -267,7 +267,6 @@ namespace GNForm3C
         #endregion 16.0 Clear Controls
 
 
-
         #region 17.0 Add Row Button
         protected void btnAdd_Click(object sender, EventArgs e)
         {
@@ -310,7 +309,7 @@ namespace GNForm3C
 
         #endregion 17.0 Add Row Button
 
-
+        #region 18.0 rpData_ItemDataBound
         protected void rpData_ItemDataBound(object sender, RepeaterItemEventArgs e)
         {
             if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
@@ -372,7 +371,7 @@ namespace GNForm3C
                 }
             }
         }
-
+        #endregion 18.0 rpData_ItemDataBound
     }
 
 }
