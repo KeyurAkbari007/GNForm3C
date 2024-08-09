@@ -43,6 +43,7 @@ namespace GNForm3C.DAL
 		{
 			try
 			{
+				
 				SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
 				DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_ACC_Expense_Insert");
 

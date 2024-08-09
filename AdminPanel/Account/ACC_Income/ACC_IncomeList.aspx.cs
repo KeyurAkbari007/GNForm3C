@@ -428,6 +428,28 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
     }
     #endregion 23.0 Fill Finyear Dropdown From Hopital
 
+    #region 24.0 Fill IncomeType Dropdown From Finyear
+    protected void ddlFinYearID_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (ddlFinYearID.SelectedIndex > 0)
+        {
+            SqlInt32 FinYearID = SqlInt32.Null;
+            SqlInt32 HospitalID = SqlInt32.Null;
+
+            FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
+            HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
+            CommonFillMethods.FillDropDownListIncomeTypeIDByFinYearID(ddlIncomeTypeID, FinYearID, HospitalID);
+
+        }
+        else
+        {
+            ddlIncomeTypeID.Items.Clear();
+            ddlIncomeTypeID.Items.Insert(0, new ListItem("Select Income Type", "-99"));
+        }
+    }
+    #endregion 24.0 Fill IncomeType Dropdown From Finyear
+
+    #region 25.0 ddlHospitalIDChanged
     private void ddlHospitalIDChanged()
     {
         if (ddlHospitalID.SelectedIndex > 0)
@@ -448,29 +470,9 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
 
         }
     }
+    #endregion 25.0 ddlHospitalIDChanged
 
-
-    #region 24.0 Fill IncomeType Dropdown From Finyear
-    protected void ddlFinYearID_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        if (ddlFinYearID.SelectedIndex > 0)
-        {
-            SqlInt32 FinYearID = SqlInt32.Null;
-            SqlInt32 HospitalID = SqlInt32.Null;
-
-            FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
-            HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-            CommonFillMethods.FillDropDownListIncomeTypeIDByFinYearID(ddlIncomeTypeID, FinYearID, HospitalID);
-            
-        }
-        else
-        {
-            ddlIncomeTypeID.Items.Clear();
-            ddlIncomeTypeID.Items.Insert(0, new ListItem("Select Income Type", "-99"));     
-        }
-    }
-    #endregion 24.0 Fill IncomeType Dropdown From Finyear
-
+    #region 26.0 btnDeleteSelected_Click
     protected void btnDeleteSelected_Click(object sender, EventArgs e)
     {
         try
@@ -520,8 +522,9 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
             ucMessage.ShowError(ex.Message);
         }
     }
+    #endregion 26.0 btnDeleteSelected_Click
 
-
+    #region 27.0 BindData
     private void BindData()
     {
         // Check if a valid page number exists in ViewState
@@ -530,8 +533,9 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
         // Call the Search method to reload data
         Search(currentPage);
     }
+    #endregion 27.0 BindData
 
-
+    #region 28.0 chkSelectAll_CheckedChanged
     protected void chkSelectAll_CheckedChanged(object sender, EventArgs e)
     {
         CheckBox chkAll = (CheckBox)sender;
@@ -544,5 +548,6 @@ public partial class AdminPanel_ACC_Income_ACC_IncomeList : System.Web.UI.Page
             }
         }
     }
+    #endregion 28.0 chkSelectAll_CheckedChanged
 
 }

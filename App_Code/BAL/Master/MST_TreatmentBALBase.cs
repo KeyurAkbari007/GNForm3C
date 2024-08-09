@@ -119,17 +119,23 @@ namespace GNForm3C.BAL
 			return dalMST_Treatment.SelectPage(PageOffset, PageSize, out TotalRecords, Treatment, HospitalID);
 		}
 
-		#endregion SelectOperation
+        public DataTable SelectComboBoxByHospitalID(SqlInt32 HospitalID)
+        {
+            MST_TreatmentDAL dalMST_Treatment = new MST_TreatmentDAL();
+            return dalMST_Treatment.SelectComboBoxByHospitalID(HospitalID);
+        }
+        #endregion SelectOperation
 
-		#region ComboBox
+        #region ComboBox
 
-		public DataTable SelectComboBox()
+        public DataTable SelectComboBox()
 		{
 			MST_TreatmentDAL dalMST_Treatment = new MST_TreatmentDAL();
 			return dalMST_Treatment.SelectComboBox();
 		}
 
 		#endregion ComboBox
+
 
 	}
 

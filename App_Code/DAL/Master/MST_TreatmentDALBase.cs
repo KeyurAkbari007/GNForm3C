@@ -308,11 +308,42 @@ namespace GNForm3C.DAL
 			}
 		}
 
-		#endregion SelectOperation
+        public DataTable SelectComboBoxByHospitalID(SqlInt32 HospitalID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_Treatment_SelectComboBoxByHospitalID");
+                sqlDB.AddInParameter(dbCMD, "@HospitalID", SqlDbType.Int, HospitalID);
 
-		#region ComboBox
+                DataTable dtMST_Treatment = new DataTable("PR_MST_Treatment_SelectComboBoxByHospitalID");
 
-		public DataTable SelectComboBox()
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtMST_Treatment);
+
+                return dtMST_Treatment;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+
+        #endregion SelectOperation
+
+        #region ComboBox
+
+        public DataTable SelectComboBox()
 		{
 			try
 			{

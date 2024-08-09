@@ -354,7 +354,14 @@
                             <Columns>
                                 <asp:BoundField DataField="SerialNo" HeaderText="SerialNo" SortExpression="SerialNo" />
                                 <asp:BoundField DataField="Treatment" HeaderText="Treatment" SortExpression="Treatment" />
-                                <asp:BoundField DataField="PatientCount" HeaderText="Patient Count" DataFormatString="{0}" />
+                                <asp:TemplateField HeaderText="Patient Count">
+                                    <ItemTemplate>
+                                        <asp:HyperLink ID="hlPatientCount" runat="server" Text='<%# Eval("PatientCount") %>' NavigateUrl='<%# "Account/ACC_Transaction/ACC_TransactionList.aspx?HospitalID=" + GNForm3C.CommonFunctions.EncryptBase64(ddlHospitalID.SelectedValue.ToString()) + "&TreatmentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TreatmentID").ToString()) %>'></asp:HyperLink>
+                                    </ItemTemplate>
+                                    <HeaderStyle CssClass="TRDark" Font-Bold="true" HorizontalAlign="Center" />
+                                    <ItemStyle HorizontalAlign="Right" />
+                                    <FooterStyle HorizontalAlign="Right" />
+                                </asp:TemplateField>
                                 <asp:BoundField DataField="IncomeAmount" HeaderText="Income Amount" DataFormatString="{0}">
                                     <HeaderStyle CssClass="TRDark" Font-Bold="true" HorizontalAlign="Center" />
                                     <ItemStyle HorizontalAlign="Right" />
@@ -363,6 +370,7 @@
                             </Columns>
                             <FooterStyle BackColor="LightGray" Font-Bold="True" />
                         </asp:GridView>
+
                     </div>
                 </div>
                 <!-- END RESULTS TABLE -->

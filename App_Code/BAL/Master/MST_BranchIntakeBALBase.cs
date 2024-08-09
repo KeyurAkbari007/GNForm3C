@@ -57,16 +57,27 @@ namespace GNForm3C
         //    dalMST_BranchIntake.SaveBranchIntakeData(branch, 2024, year2024);
         //}
 
-        public void SaveBranchIntakeData(string branch, Dictionary<int, int> intakeData)
+        public bool SaveBranchIntakeData(DataTable branchIntakeTable)
         {
-            MST_BranchIntakeDAL dalMST_BranchIntake = new MST_BranchIntakeDAL();
-
-            foreach (var entry in intakeData)
+            try
             {
-                dalMST_BranchIntake.SaveBranchIntakeData(branch, entry.Key, entry.Value);
+  
+
+                MST_BranchIntakeDAL dalMST_BranchIntake = new MST_BranchIntakeDAL();
+                dalMST_BranchIntake.SaveBranchIntakeData(branchIntakeTable);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //// Handle general exceptions
+                //Message = ExceptionMessage(ex);
+                //if (ExceptionHandler(ex))
+
+         
+                return false;
             }
         }
-
+        
         #endregion Insert/Update Intake DATA
 
         #region Delete BranchIntake Data

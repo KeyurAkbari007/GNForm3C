@@ -25,7 +25,8 @@ public partial class _Default : System.Web.UI.Page
         {
             Session.Clear();
             this.Page.Title = "Login - " + CV.DefaultCompanyName;
-           // imgLogo.ImageUrl = CV.DefaultLoginLogoPath;
+            // imgLogo.ImageUrl = CV.DefaultLoginLogoPath;
+            lbtnLogin.Focus();
         }
 
         #region Check Login Restricted
@@ -93,6 +94,7 @@ public partial class _Default : System.Web.UI.Page
 
                     string strDomainURL = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority) + CV.AppendForMenu;
                 }
+               
                 Session["HomeURL"] = CV.DefaultHomeURL;
                 Response.Redirect("~/AdminPanel/Default.aspx");
             }

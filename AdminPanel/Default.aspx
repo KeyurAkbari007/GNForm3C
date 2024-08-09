@@ -387,6 +387,17 @@
                                                                                 <div class="number"></div>
                                                                             </div>
                                                                         </div>
+                                                                    </a> 
+                                                                    <a href="Account/ACC_GNTransaction/ACC_GNTransaction.aspx">
+                                                                        <div class="tile bg-yellow">
+                                                                            <div class="tile-body">
+                                                                                <i class="fa fa-list"></i>
+                                                                            </div>
+                                                                            <div class="tile-object">
+                                                                                <div class="name">GNTransaction</div>
+                                                                                <div class="number"></div>
+                                                                            </div>
+                                                                        </div>
                                                                     </a>
                                                                     <a href="Account/ACC_TransactionTran/ACC_TransactionTranList.aspx">
                                                                         <div class="tile bg-blue">

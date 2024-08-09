@@ -162,6 +162,7 @@ namespace GNForm3C
 
         #endregion Delete BranchIntake Data
 
+        #region GetBranchIntakeData
         public DataTable GetBranchIntakeData()
         {
             try
@@ -187,34 +188,44 @@ namespace GNForm3C
                 return null;
             }
         }
+        #endregion GetBranchIntakeData
 
-        public void SaveBranchIntakeData(string branch, int year, int intake)
+        #region SaveBranchIntakeData
+        public bool SaveBranchIntakeData(DataTable branchIntakeTable)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_BranchIntake_InsertUpdate");
 
-                sqlDB.AddInParameter(dbCMD, "@Branch", DbType.String, branch);
-                sqlDB.AddInParameter(dbCMD, "@Year", DbType.Int32, year);
-                sqlDB.AddInParameter(dbCMD, "@Intake", DbType.Int32, intake);
+                SqlParameter tvpParam = new SqlParameter
+                {
+                    ParameterName = "@BranchIntakeData",
+                    SqlDbType = SqlDbType.Structured,
+                    Value = branchIntakeTable,
+                    TypeName = "dbo.BranchIntakeType"
+                };
+                dbCMD.Parameters.Add(tvpParam);
 
                 sqlDB.ExecuteNonQuery(dbCMD);
+                return true;
             }
             catch (SqlException sqlex)
             {
                 Message = SQLDataExceptionMessage(sqlex);
                 if (SQLDataExceptionHandler(sqlex))
                     throw;
+                return false;
             }
             catch (Exception ex)
             {
                 Message = ExceptionMessage(ex);
                 if (ExceptionHandler(ex))
                     throw;
+                return false;
             }
         }
-
+        #endregion SaveBranchIntakeData
 
     }
 }

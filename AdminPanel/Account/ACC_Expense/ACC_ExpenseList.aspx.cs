@@ -435,27 +435,6 @@ public partial class AdminPanel_ACC_Expense_ACC_ExpenseList : System.Web.UI.Page
         ddlHospitalIDChanged();
     }
     #endregion 23.0 Fill Finyear Dropdown From Hopital
-    private void ddlHospitalIDChanged()
-    {
-        if (ddlHospitalID.SelectedIndex > 0)
-        {
-            ddlExpenseTypeID.SelectedIndex = 0;
-            SqlInt32 HospitalID = SqlInt32.Null;
-
-            HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-            CommonFillMethods.FillDropDownListExpenseFinYearIDByHospitalID(ddlFinYearID, HospitalID);
-
-        }
-        else
-        {
-            ddlFinYearID.Items.Clear();
-            ddlFinYearID.Items.Insert(0, new ListItem("Select Fin Year", "-99"));
-            ddlExpenseTypeID.Items.Clear();
-            ddlExpenseTypeID.Items.Insert(0, new ListItem("Select Expense Type", "-99"));
-
-        }
-    }
-
 
     #region 24.0 Fill ExpenseType Dropdown From Finyear
     protected void ddlFinYearID_SelectedIndexChanged1(object sender, EventArgs e)
@@ -477,4 +456,27 @@ public partial class AdminPanel_ACC_Expense_ACC_ExpenseList : System.Web.UI.Page
         }
     }
     #endregion 24.0 Fill ExpenseType Dropdown From Finyear
+
+    #region 25.0 ddlHospitalIDChanged
+    private void ddlHospitalIDChanged()
+    {
+        if (ddlHospitalID.SelectedIndex > 0)
+        {
+            ddlExpenseTypeID.SelectedIndex = 0;
+            SqlInt32 HospitalID = SqlInt32.Null;
+
+            HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
+            CommonFillMethods.FillDropDownListExpenseFinYearIDByHospitalID(ddlFinYearID, HospitalID);
+
+        }
+        else
+        {
+            ddlFinYearID.Items.Clear();
+            ddlFinYearID.Items.Insert(0, new ListItem("Select Fin Year", "-99"));
+            ddlExpenseTypeID.Items.Clear();
+            ddlExpenseTypeID.Items.Insert(0, new ListItem("Select Expense Type", "-99"));
+
+        }
+    }
+    #endregion  25.0 ddlHospitalIDChanged
 }

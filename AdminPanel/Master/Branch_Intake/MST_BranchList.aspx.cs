@@ -132,46 +132,69 @@ public partial class AdminPanel_Master_MST_Student_MST_BranchIntake : System.Web
     #region 16.0 MST_BranchIntake Add/Edit
     protected void btnSave_Click(object sender, EventArgs e)
     {
-        MST_BranchIntakeBAL balMST_BranchIntake = new MST_BranchIntakeBAL();
-
-        foreach (RepeaterItem item in rpIntakeData.Items)
+        Page.Validate();
+        if (Page.IsValid)
         {
-            Label lblBranch = (Label)item.FindControl("lblBranch");
-
-            if (lblBranch != null)
+            try
             {
-                string branch = lblBranch.Text;
-                Repeater rpAddmissionYearBody = (Repeater)item.FindControl("rpAddmissionYearBody");
+                MST_BranchIntakeBAL balSTU_Student = new MST_BranchIntakeBAL();
+                DataTable branchIntakeTable = new DataTable();
+                branchIntakeTable.Columns.Add("Branch", typeof(string));
+                branchIntakeTable.Columns.Add("AdmissionYear", typeof(string));
+                branchIntakeTable.Columns.Add("Intake", typeof(int));
 
-                if (rpAddmissionYearBody != null)
+
+
+                foreach (RepeaterItem item in rpIntakeData.Items)
                 {
-                    Dictionary<int, int> yearIntakeData = new Dictionary<int, int>();
+                    Label lblBranch = (Label)item.FindControl("lblBranch");
 
-                    foreach (RepeaterItem yearItem in rpAddmissionYearBody.Items)
+                    if (lblBranch != null)
                     {
-                        TextBox txtIntake = (TextBox)yearItem.FindControl("txtIntake");
-                        Label lblYear = (Label)yearItem.FindControl("lblYear");
+                        Repeater rpAddmissionYearBody = (Repeater)item.FindControl("rpAddmissionYearBody");
 
-                        if (txtIntake != null && lblYear != null)
+                        if (rpAddmissionYearBody != null)
                         {
-                            int intake;
-                            int year;
-
-                            if (int.TryParse(txtIntake.Text, out intake) && int.TryParse(lblYear.Text, out year))
+                            foreach (RepeaterItem yearItem in rpAddmissionYearBody.Items)
                             {
-                                yearIntakeData[year] = intake;
+                                TextBox txtIntake = (TextBox)yearItem.FindControl("txtIntake");
+                                Label lblYear = (Label)yearItem.FindControl("lblYear");
+
+                                if (txtIntake != null && lblYear != null)
+                                {
+                                    int intake;
+                                    int year;
+
+                                    if (int.TryParse(txtIntake.Text, out intake) && int.TryParse(lblYear.Text, out year))
+                                    {
+                                        branchIntakeTable.Rows.Add(lblBranch.Text, year, intake);
+                                    }
+                                }
                             }
+
+
                         }
                     }
-
-                    // Save the intake data for the branch
-                    balMST_BranchIntake.SaveBranchIntakeData(branch, yearIntakeData);
                 }
+                if (balSTU_Student.SaveBranchIntakeData(branchIntakeTable))
+                {
+                    ucMessage.ShowSuccess(CommonMessage.RecordSaved());
+                }
+                else
+                {
+                    ucMessage.ShowError(balSTU_Student.Message);
+                }
+               
+
+                // Refresh the data
+                Search(1);
+
+            }
+            catch (Exception ex)
+            {
+                ucMessage.ShowError(ex.Message);
             }
         }
-
-        // Refresh the data
-        Search(1);
     }
 
     #endregion 16.0 MST_BranchIntake Add/Edit
