@@ -172,7 +172,8 @@
                             </div>
                             <div class="tools">
                                 <div>
-                                    <asp:HyperLink SkinID="hlAddNew" ID="hlAddNew" NavigateUrl="~/AdminPanel/Master/MST_Student/MST_StudentAddEdit.aspx" runat="server"></asp:HyperLink>
+                                    <%--<asp:HyperLink SkinID="hlAddNew" ID="hlAddNew" NavigateUrl="~/AdminPanel/Master/MST_Student/MST_StudentAddEdit.aspx" runat="server"></asp:HyperLink>--%>
+                                    <asp:HyperLink SkinID="EditPopup" ID="hlAddNew" NavigateUrl="~/AdminPanel/Master/MST_Student/STU_StudentAddEditPopup.aspx"  data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
                                     <div class="btn-group" runat="server" id="Div_ExportOption" visible="false">
                                         <button class="btn dropdown-toggle" data-toggle="dropdown">
                                             Export <i class="fa fa-angle-down"></i>
@@ -225,9 +226,7 @@
                                                     <th>
                                                         <asp:Label ID="lbhGender" runat="server" Text="Gender"></asp:Label>
                                                     </th>
-                                                    <th>
-                                                        <asp:Label ID="lbhUserName" runat="server" Text="User"></asp:Label>
-                                                    </th>
+
 
                                                     <th class="nosortsearch text-nowrap text-center">
                                                         <asp:Label ID="lbhAction" runat="server" Text="Action"></asp:Label>
@@ -242,7 +241,7 @@
                                                         <%-- Table Rows --%>
                                                         <tr class="odd gradeX">
                                                             <td>
-                                                                <asp:HyperLink ID="hlViewStudentID" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/MST_StudentView.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#view" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("StudentName") %></asp:HyperLink>
+                                                                <asp:HyperLink ID="hlViewStudentID" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/MST_StudentView.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("StudentName") %></asp:HyperLink>
                                                             </td>
 
                                                             <td>
@@ -269,19 +268,17 @@
                                                             <td>
                                                                 <%#Eval("Gender") %>
                                                             </td>
-                                                            <td>
-                                                                <%#Eval("UserName") %>
-                                                            </td>
+
                                                             <td class="text-nowrap text-center">
-                                                                <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/MST_StudentView.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#view" data-toggle="modal" runat="server"></asp:HyperLink>
-                                                                <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/MST_StudentAddEdit.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' runat="server"></asp:HyperLink>
+                                                                <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/MST_StudentView.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
+                                                                <%--<asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/MST_StudentAddEdit.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' runat="server"></asp:HyperLink>--%>
+                                                                <asp:HyperLink ID="hlEdit" SkinID="EditPopup" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/STU_StudentAddEditPopup.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
                                                                 <asp:LinkButton ID="lbtnDelete" runat="server"
                                                                     SkinID="Delete"
                                                                     OnClientClick="javascript:return confirm('Are you sure you want to delete record ? ');"
                                                                     CommandName="DeleteRecord"
                                                                     CommandArgument='<%#Eval("StudentID") %>'>
                                                                 </asp:LinkButton>
-                                                                <asp:HyperLink ID="hlPopUpEdit" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Master/MST_Student/STU_StudentAddEditPopUp.aspx?StudentID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("StudentID").ToString()) %>' data-target="#view" data-toggle="modal" runat="server"></asp:HyperLink>
                                                             </td>
                                                         </tr>
                                                         <%-- END Table Rows --%>

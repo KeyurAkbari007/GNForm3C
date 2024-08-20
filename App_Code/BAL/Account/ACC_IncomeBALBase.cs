@@ -174,6 +174,15 @@ namespace GNForm3C.BAL
             return dalAcc_account.SelectShow(HospitalID, FinYearID);
         }
 
+        #region RDLC (Reports)
+        public DataTable Report_ACC_Income_ByFinYear()
+        {
+            ACC_IncomeDAL dalACC_Income = new ACC_IncomeDAL();
+            return dalACC_Income.Report_ACC_Income_ByFinYear();
+        }
+
+        #endregion RDLC (Reports)
+
     }
 
 }

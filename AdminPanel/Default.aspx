@@ -387,7 +387,7 @@
                                                                                 <div class="number"></div>
                                                                             </div>
                                                                         </div>
-                                                                    </a> 
+                                                                    </a>
                                                                     <a href="Account/ACC_GNTransaction/ACC_GNTransaction.aspx">
                                                                         <div class="tile bg-yellow">
                                                                             <div class="tile-body">
@@ -410,6 +410,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </a>
+                                                          
                                                                     <a href="Config/CFG_ReportSetting/CFG_ReportSettingList.aspx">
                                                                         <div class="tile bg-red">
                                                                             <div class="tile-body">
@@ -454,7 +455,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </a>
-                                                                     <a href="Master/democontent/Demo.aspx">
+                                                                    <a href="Master/democontent/Demo.aspx">
                                                                         <div class="tile bg-yellow">
                                                                             <div class="tile-body">
                                                                                 <i class="fa fa-list"></i>
@@ -545,8 +546,8 @@
                                                                                 <div class="number"></div>
                                                                             </div>
                                                                         </div>
-                                                                    </a>  
-                                                                    
+                                                                    </a>
+
                                                                     <a href="Account/ACC_Expense/ACC_ExpenseAddEdit.aspx">
                                                                         <div class="tile bg-green">
                                                                             <div class="tile-body">

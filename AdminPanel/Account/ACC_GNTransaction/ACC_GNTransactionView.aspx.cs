@@ -44,7 +44,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_TransactionView : 
             {
                 foreach (DataRow dr in dtACC_Transaction.Rows)
                 {
-
+                    if (!dr["PatientID"].Equals(DBNull.Value))
+                        //ucPatient.ShowPatient(Convert.ToInt32(dr["PatientID"]));
                     if (!dr["Patient"].Equals(DBNull.Value))
                         lblPatient.Text = Convert.ToString(dr["Patient"]);
 

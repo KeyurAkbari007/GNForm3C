@@ -18,6 +18,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
     static Int32 PageRecordSize = CV.PageRecordSize;//Size of record per page
     Int32 PageDisplaySize = CV.PageDisplaySize;
     Int32 DisplayIndex = CV.DisplayIndex;
+    private DataTable dtACC_PAtient = new DataTable("dtACC_Patient");
+    private dsGN_Transaction objdsACC_Expense = new dsGN_Transaction();
 
     #endregion 11.0 Variables
 
@@ -323,6 +325,7 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
 
 
         }
+        
     }
 
     #endregion 16.1 Item Command Event    
@@ -554,7 +557,6 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
 
     #endregion 22.0 ClearControls
 
-  
 
 
 }

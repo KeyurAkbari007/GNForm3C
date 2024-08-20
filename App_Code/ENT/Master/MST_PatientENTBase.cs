@@ -122,6 +122,18 @@ namespace GNForm3C.ENT
             {
                 _Modified = value;
             }
+        }    
+        protected SqlString _PatientPhotoPath;
+        public SqlString PatientPhotoPath
+        {
+            get
+            {
+                return _PatientPhotoPath;
+            }
+            set
+            {
+                _PatientPhotoPath = value;
+            }
         }
 
         #endregion Properties
@@ -168,6 +180,9 @@ namespace GNForm3C.ENT
             if (!Modified.IsNull)
                 MST_PatientENT_String += "| Modified = " + Modified.Value.ToString("dd-MM-yyyy");
 
+
+            if (!PatientPhotoPath.IsNull)
+                MST_PatientENT_String += "| PatientPhotoPath = " + PatientPhotoPath.Value.ToString();
             MST_PatientENT_String = MST_PatientENT_String.Trim();
 
             return MST_PatientENT_String;

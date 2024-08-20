@@ -184,7 +184,7 @@ namespace GNForm3C.BAL
         #region InsertOperationPatient
 
         #region Insert
-        public MST_PatientENT InsertPatient(MST_PatientENT entMST_Patient)
+        public SqlInt32 InsertPatient(MST_PatientENT entMST_Patient)
         {
             ACC_GNTransactionDAL dalMST_Patient = new ACC_GNTransactionDAL();
             return dalMST_Patient.InsertPatient(entMST_Patient);
