@@ -12,6 +12,28 @@ using System.Web;
 /// </summary>
 public class MST_PatientBALBase
 {
+    #region Private Fields
+
+    private string _Message;
+
+    #endregion Private Fields
+
+    #region Public Properties
+
+    public string Message
+    {
+        get
+        {
+            return _Message;
+        }
+        set
+        {
+            _Message = value;
+        }
+    }
+
+    #endregion Public Properties
+
     public MST_PatientBALBase()
     {
         //
@@ -35,4 +57,37 @@ public class MST_PatientBALBase
         MST_PatientDAL dalMST_Patient = new MST_PatientDAL();
         return dalMST_Patient.PatientReport(TransactionID);
     }
+    public MST_PatientENT SelectByPK(SqlInt32 PatientID)
+    {
+        MST_PatientDAL dalMST_GNPatient = new MST_PatientDAL();
+        return dalMST_GNPatient.SelectByPK(PatientID);
+    }
+    #region Update
+
+    public Boolean Update(MST_PatientENT entMST_GNPatient)
+    {
+        MST_PatientDAL dalMST_GNPatient = new MST_PatientDAL();
+        if (dalMST_GNPatient.Update(entMST_GNPatient))
+
+        {
+            return true;
+        }
+        else
+        {
+            this.Message = dalMST_GNPatient.Message;
+            return false;
+        }
+    }
+
+    #endregion Update
+
+    #region Report
+
+    public DataTable RPT_PatientIDCard()
+    {
+        MST_PatientBAL dalMST_GNPatient = new MST_PatientBAL();
+        return dalMST_GNPatient.RPT_PatientIDCard();
+    }
+
+    #endregion Report
 }

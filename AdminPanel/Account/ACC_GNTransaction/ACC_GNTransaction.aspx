@@ -265,7 +265,7 @@
                                 <div class="row" runat="server" id="Div_SearchResult" visible="false">
                                     <div class="col-md-12">
                                         <div id="TableContent">
-                                            <table class="table table-bordered table-advanced table-striped table-hover" id="sample_1">
+                                            <table class="table  table-responsive  table-bordered table-advanced table-striped table-hover" id="sample_1">
                                                 <%-- Table Header --%>
                                                 <thead>
                                                     <tr class="TRDark">
@@ -326,7 +326,7 @@
                                                     <asp:Repeater ID="rpData" runat="server" OnItemCommand="rpData_ItemCommand">
                                                         <ItemTemplate>
                                                             <%-- Table Rows --%>
-                                                            <tr class="odd gradeX">
+                                                            <tr class="odd gradeX text-nowrap">
                                                                 <td>
                                                                     <asp:HyperLink ID="hlViewTransactionID" NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionView.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' data-target="#viewiFrameReg" CssClass="modalButton" data-toggle="modal" runat="server"><%#Eval("PatientName") %></asp:HyperLink>
                                                                 </td>
@@ -348,7 +348,7 @@
                                                                 <td>
                                                                     <%#Eval("ReceiptNo") %>
                                                                 </td>
-                                                                <td class="text-center">
+                                                                <td class="text-center "  style="width: 150px;">
                                                                     <%#Eval("Date", GNForm3C.CV.DefaultDateFormatForGrid) %>
                                                                 </td>
                                                                 <td>
@@ -377,23 +377,16 @@
                                                                 </td>
                                                                 <td class="text-nowrap text-center">
                                                                     <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionView.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
-                                                                    <%--                                                                <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Account/ACC_Transaction/ACC_TransactionAddEdit.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' runat="server"></asp:HyperLink>--%>
-                                                                    <%--   <asp:LinkButton ID="lbtnDelete" runat="server"
-                                                                    SkinID="Delete"
-                                                                    OnClientClick="javascript:return confirm('Are you sure you want to delete record ? ');"
-                                                                    CommandName="DeleteRecord"
-                                                                    CommandArgument='<%#Eval("TransactionID") %>'>--%>
-                                                                    <%--</asp:LinkButton>--%>
-                                                                    <asp:LinkButton ID="LinkButton1" runat="server"
+                                                                      <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionAddEdit.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' runat="server"></asp:HyperLink>
+                                                                 
+                                                                    <asp:LinkButton ID="lbtDelete" runat="server"
                                                                         SkinID="Delete"
-                                                                        OnClientClick="javascript:return confirm('Are you sure you want to delete the record?');"
+                                                                      
+                                                                        OnClientClick="javascript:return confirm('Are you sure you want to update date of discharge?');"
                                                                         CommandName="UpdateDischarge"
                                                                         CommandArgument='<%# Eval("TransactionID") %>'
-                                                                        Enabled='<%# Eval("DateOfDischarge") == DBNull.Value ? true : false %>'>
+                                                                        Visible='<%# Eval("DateOfDischarge") == DBNull.Value ? true : false %>'>
                                                                     </asp:LinkButton>
-                                                                    <%--<asp:LinkButton ID="LinkButton2" SkinID="lbtnPrint" runat="server" CommandName="PatientReport"
-                                                                        CommandArgument='<%# Eval("TransactionID") %>'><i class="fa fa-receipt"></i>
-                                                                    </asp:LinkButton>--%>
                                                                     <asp:HyperLink
                                                                         runat="server"
                                                                         ID="hlprint"

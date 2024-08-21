@@ -38,6 +38,12 @@ public class ExpInm_LedgerListBALBase
     {
         ExpInm_LedgerListDAL dalExpInm_LedgerList = new ExpInm_LedgerListDAL();
         return dalExpInm_LedgerList.SelectPage(PageOffset, PageSize, out TotalRecords, FromDate, ToDate, Type);
+    } 
+
+    public DataTable HospitalWise_FinYearWise_IncomeExpenseList()
+    {
+        ExpInm_LedgerListDAL dalExpInm_LedgerList = new ExpInm_LedgerListDAL();
+        return dalExpInm_LedgerList.HospitalWise_FinYearWise_IncomeExpenseList();
     }
 
     #region Delete Multiple Ledgers

@@ -76,11 +76,31 @@ namespace GNForm3C.BAL
 			}
 		}
 
-		#endregion UpdateOperation
+        #region Update
 
-		#region DeleteOperation
+        public Boolean Update(MST_PatientENT entMST_GNPatient)
+        {
+            MST_PatientDAL dalMST_GNPatient = new MST_PatientDAL();
+            if (dalMST_GNPatient.Update(entMST_GNPatient))
 
-		public Boolean Delete(SqlInt32 IncomeTypeID)
+            
+            {
+                return true;
+            }
+            else
+            {
+                this.Message = dalMST_GNPatient.Message;
+                return false;
+            }
+        }
+
+        #endregion Update
+
+        #endregion UpdateOperation
+
+        #region DeleteOperation
+
+        public Boolean Delete(SqlInt32 IncomeTypeID)
 		{
 			MST_IncomeTypeDAL dalMST_IncomeType = new MST_IncomeTypeDAL();
 			if(dalMST_IncomeType.Delete(IncomeTypeID))

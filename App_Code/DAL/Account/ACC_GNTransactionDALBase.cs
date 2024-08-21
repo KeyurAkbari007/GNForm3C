@@ -103,22 +103,13 @@ namespace GNForm3C.DAL
 
                 sqlDB.AddInParameter(dbCMD, "@TransactionID", SqlDbType.Int, entACC_GNTransaction.TransactionID);
                 sqlDB.AddInParameter(dbCMD, "@PatientID", SqlDbType.Int, entACC_GNTransaction.PatientID);
-                sqlDB.AddInParameter(dbCMD, "@Amount", SqlDbType.Decimal, entACC_GNTransaction.Amount);
+                sqlDB.AddInParameter(dbCMD, "@Deposite", SqlDbType.Decimal, entACC_GNTransaction.Deposite);
                 sqlDB.AddInParameter(dbCMD, "@ReferenceDoctor", SqlDbType.NVarChar, entACC_GNTransaction.ReferenceDoctor);
-                sqlDB.AddInParameter(dbCMD, "@Count", SqlDbType.Int, entACC_GNTransaction.Count);
-                sqlDB.AddInParameter(dbCMD, "@ReceiptNo", SqlDbType.Int, entACC_GNTransaction.ReceiptNo);
-                sqlDB.AddInParameter(dbCMD, "@Date", SqlDbType.DateTime, entACC_GNTransaction.Date);
                 sqlDB.AddInParameter(dbCMD, "@DateOfAdmission", SqlDbType.DateTime, entACC_GNTransaction.DateOfAdmission);
                 sqlDB.AddInParameter(dbCMD, "@DateOfDischarge", SqlDbType.DateTime, entACC_GNTransaction.DateOfDischarge);
-                sqlDB.AddInParameter(dbCMD, "@Deposite", SqlDbType.Decimal, entACC_GNTransaction.Deposite);
-                sqlDB.AddInParameter(dbCMD, "@NetAmount", SqlDbType.Decimal, entACC_GNTransaction.NetAmount);
-                sqlDB.AddInParameter(dbCMD, "@NoOfDays", SqlDbType.Int, entACC_GNTransaction.NoOfDays);
                 sqlDB.AddInParameter(dbCMD, "@Remarks", SqlDbType.NVarChar, entACC_GNTransaction.Remarks);
-                sqlDB.AddInParameter(dbCMD, "@HospitalID", SqlDbType.Int, entACC_GNTransaction.HospitalID);
-                sqlDB.AddInParameter(dbCMD, "@FinYearID", SqlDbType.Int, entACC_GNTransaction.FinYearID);
                 sqlDB.AddInParameter(dbCMD, "@ReceiptTypeID", SqlDbType.Int, entACC_GNTransaction.ReceiptTypeID);
                 sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, entACC_GNTransaction.UserID);
-                sqlDB.AddInParameter(dbCMD, "@Created", SqlDbType.DateTime, entACC_GNTransaction.Created);
                 sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, entACC_GNTransaction.Modified);
 
                 DataBaseHelper DBH = new DataBaseHelper();

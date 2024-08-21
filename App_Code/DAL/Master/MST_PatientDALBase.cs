@@ -119,6 +119,75 @@ namespace GNForm3C.DAL
                 return null;
             }
         }
+        #region SelectByPK
+
+        public MST_PatientENT SelectByPK(SqlInt32 PatientID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_GNPatient_SelectByPK");
+
+                sqlDB.AddInParameter(dbCMD, "@PatientID", SqlDbType.Int, PatientID);
+
+                MST_PatientENT entMST_GNPatient = new MST_PatientENT();
+                DataBaseHelper DBH = new DataBaseHelper();
+                using (IDataReader dr = DBH.ExecuteReader(sqlDB, dbCMD))
+                {
+                    while (dr.Read())
+                    {
+                        if (!dr["PatientID"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.PatientID = Convert.ToInt32(dr["PatientID"]);
+
+                        if (!dr["PatientName"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.PatientName = Convert.ToString(dr["PatientName"]);
+
+                        if (!dr["Age"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.Age = Convert.ToInt32(dr["Age"]);
+
+                        if (!dr["DOB"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.DOB = Convert.ToDateTime(dr["DOB"]);
+
+                        if (!dr["MobileNo"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.MobileNo = Convert.ToString(dr["MobileNo"]);
+
+                        if (!dr["PrimaryDesc"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.PrimaryDesc = Convert.ToString(dr["PrimaryDesc"]);
+
+                        if (!dr["UserID"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.UserID = Convert.ToInt32(dr["UserID"]);
+
+                        if (!dr["PatientPhotoPath"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.PatientPhotoPath = Convert.ToString(dr["PatientPhotoPath"]);
+
+                        if (!dr["Created"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.Created = Convert.ToDateTime(dr["Created"]);
+
+                        if (!dr["Modified"].Equals(System.DBNull.Value))
+                            entMST_GNPatient.Modified = Convert.ToDateTime(dr["Modified"]);
+
+                    }
+                }
+                return entMST_GNPatient;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+
+        }
+
+        #endregion SelectByPK
 
         #region Patient Report 
         public DataTable PatientReport(SqlInt32 TransactionID)
@@ -153,6 +222,86 @@ namespace GNForm3C.DAL
             }
         }
         #endregion Patient Report 
+
+        #region Update
+
+        public Boolean Update(MST_PatientENT entMST_GNPatient)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_GNPatient_Update");
+
+                sqlDB.AddInParameter(dbCMD, "@PatientID", SqlDbType.Int, entMST_GNPatient.PatientID);
+                sqlDB.AddInParameter(dbCMD, "@PatientName", SqlDbType.NVarChar, entMST_GNPatient.PatientName);
+                sqlDB.AddInParameter(dbCMD, "@Age", SqlDbType.Int, entMST_GNPatient.Age);
+                sqlDB.AddInParameter(dbCMD, "@MobileNo", SqlDbType.NVarChar, entMST_GNPatient.MobileNo);
+                sqlDB.AddInParameter(dbCMD, "@DOB", SqlDbType.DateTime, entMST_GNPatient.DOB);
+                sqlDB.AddInParameter(dbCMD, "@PrimaryDesc", SqlDbType.NVarChar, entMST_GNPatient.PrimaryDesc);
+                sqlDB.AddInParameter(dbCMD, "@UserID", SqlDbType.Int, entMST_GNPatient.UserID);
+                sqlDB.AddInParameter(dbCMD, "@PatientPhotoPath", SqlDbType.NVarChar, entMST_GNPatient.PatientPhotoPath);
+                sqlDB.AddInParameter(dbCMD, "@Modified", SqlDbType.DateTime, entMST_GNPatient.Modified);
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.ExecuteNonQuery(sqlDB, dbCMD);
+
+                //PatientID = entMST_GNPatient.PatientID;
+
+                return true;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return false;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return false;
+            }
+        }
+
+        #endregion Update
+
+
+        #region Report
+
+        public DataTable RPT_PatientIDCard()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_MST_PatientList");
+
+                DataTable dtACC_Expense = new DataTable("PP_MST_PatientList");
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtACC_Expense);
+
+                return dtACC_Expense;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+
+        #endregion Report
+
 
 
     }

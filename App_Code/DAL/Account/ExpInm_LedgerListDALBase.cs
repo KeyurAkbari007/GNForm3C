@@ -81,6 +81,40 @@ namespace GNForm3C.DAL
             }
         }
 
+        public DataTable HospitalWise_FinYearWise_IncomeExpenseList()
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_HospitalWise_FinYearWise_IncomeExpenseList");
+
+
+
+                DataTable dtLedgerList = new DataTable("PP_HospitalWise_FinYearWise_IncomeExpenseList");
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtLedgerList);
+
+
+                return dtLedgerList;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+
+
         #endregion SelectPageOperation
 
         #region DeleteMultipleLedgersOperation

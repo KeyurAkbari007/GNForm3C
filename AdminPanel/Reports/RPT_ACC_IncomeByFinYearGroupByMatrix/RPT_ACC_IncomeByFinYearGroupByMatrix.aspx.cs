@@ -15,6 +15,7 @@ public partial class AdminPanel_Reports_RPT_ACC_IncomeByFinYearGroupByMatrix_RPT
     DataTable dtACC_Income = new DataTable();
     private dsACC_Income objAcc_income = new dsACC_Income();
     #endregion private variable     
+
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
@@ -32,7 +33,6 @@ public partial class AdminPanel_Reports_RPT_ACC_IncomeByFinYearGroupByMatrix_RPT
 
     }
     #endregion ShowReport
-
     #region FillDataSet
     protected void FillDataSet()
     {

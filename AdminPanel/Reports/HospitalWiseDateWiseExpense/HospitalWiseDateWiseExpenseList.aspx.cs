@@ -53,6 +53,7 @@ public partial class AdminPanel_Reports_HospitalWiseDateWiseExpenseList_Hospital
     {
     }
     #endregion
+
     #region 14.0 DropDownList
 
     #region 14.1 Fill DropDownList
@@ -66,6 +67,7 @@ public partial class AdminPanel_Reports_HospitalWiseDateWiseExpenseList_Hospital
     #endregion 14.1 Fill DropDownList
 
     #endregion 14.0 DropDownList
+
     #region 15.0 Search
 
     #region 15.1 Button Search Click Event
@@ -193,52 +195,76 @@ public partial class AdminPanel_Reports_HospitalWiseDateWiseExpenseList_Hospital
 
     #endregion 16.0 Repeater Events
 
-    //#region 17.0 Export Data 
+    #region 17.0 Export Data
 
-    //#region 17.1 Excel Export Button Click Event
+    #region 17.1 Excel Export Button Click Event
 
-    //protected void lbtnExport_Click(object sender, EventArgs e)
-    //{
-    //    LinkButton lbtn = (LinkButton)(sender);
-    //    String ExportType = lbtn.CommandArgument.ToString();
-    //    int TotalReceivedRecord = 0;
-    //    SqlString LedgerType = SqlString.Null;
-    //    SqlDateTime FromDate = SqlDateTime.Null;
-    //    SqlDateTime ToDate = SqlDateTime.Null;
+    protected void lbtnExport_Click(object sender, EventArgs e)
+    {
+        LinkButton lbtn = (LinkButton)(sender);
+        String ExportType = lbtn.CommandArgument.ToString();
+        #region Parameters
 
-    //    if (txtLedgerType.Text.Trim() != String.Empty)
-    //    {
-    //        LedgerType = txtLedgerType.Text.Trim();
-    //    }
-    //    if (dtpFromDate.Text.Trim() != String.Empty)
-    //    {
-    //        FromDate = Convert.ToDateTime(dtpFromDate.Text.Trim());
-    //    }
-    //    if (dtpToDate.Text.Trim() != String.Empty)
-    //    {
-    //        ToDate = Convert.ToDateTime(dtpToDate.Text.Trim());
-    //    }
+        SqlDateTime FromDate = SqlDateTime.Null;
+        SqlDateTime ToDate = SqlDateTime.Null;
+        SqlInt32 HospitalID = SqlInt32.Null;
 
+        #endregion Parameters
 
+        #region Gather Data
 
+        if (dtpFromDate.Text.Trim() != String.Empty)
+            FromDate = Convert.ToDateTime(dtpFromDate.Text);
 
-    //    Int32 Offset = 0;
+        if (dtpFromDate.Text.Trim() != String.Empty)
+            ToDate = Convert.ToDateTime(dtpToDate.Text);
+        if (ddlHospitalID.SelectedIndex > 0)
+            HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
 
-    //    if (ViewState["CurrentPage"] != null)
-    //        Offset = (Convert.ToInt32(ViewState["CurrentPage"]) - 1) * PageRecordSize;
+        #endregion Gather Data
 
-    //    ACC_ExpInm_LedgerBAL balACC_ExpInm_LedgerBAL = new ACC_ExpInm_LedgerBAL();
-    //    DataTable dtACC_ExpInm_LedgerBAL = balACC_ExpInm_LedgerBAL.SelectPage(Offset, PageRecordSize, out TotalReceivedRecord, FromDate, ToDate, LedgerType);
-    //    if (dtACC_ExpInm_LedgerBAL != null && dtACC_ExpInm_LedgerBAL.Rows.Count > 0)
-    //    {
-    //        Session["ExportTable"] = dtACC_ExpInm_LedgerBAL;
-    //        Response.Redirect("~/Default/Export.aspx?ExportType=" + ExportType);
-    //    }
-    //}
+        ACC_ExpenseBAL balACC_Expense = new ACC_ExpenseBAL();
 
-    //#endregion 17.1 Excel Export Button Click Event
+        dtACC_Expense = balACC_Expense.HospitalWiseExpense(HospitalID, FromDate, ToDate);
+        if (dtACC_Expense != null && dtACC_Expense.Rows.Count > 0)
+        {
+            ExportReport(ExportType);
+        }
+    }
 
-    //#endregion 17.0 Export Data 
+    private void ExportReport(string format)
+    {
+        try
+        {
+            string mimeType, encoding, extension;
+            Microsoft.Reporting.WebForms.Warning[] warnings;
+            string[] streamIds;
+
+            byte[] bytes = rvHospitalWiseExpenseList.LocalReport.Render(format,
+                                                        null,
+                                                        out mimeType,
+                                                        out encoding,
+                                                        out extension,
+                                                        out streamIds,
+                                                        out warnings);
+
+            Response.Clear();
+            Response.ContentType = mimeType;
+            Response.AddHeader("Content-Disposition", "attachment; filename=report." + extension);
+            Response.BinaryWrite(bytes);
+            Response.End();
+
+        }
+        catch (Exception ex)
+        {
+            ucMessage.ShowError(format + " is Not Correct Format");
+        }
+
+    }
+
+    #endregion 17.1 Excel Export Button Click Event
+
+    #endregion 17.0 Export Data
 
     #region 18.0 Cancel Button Event
 
@@ -390,74 +416,6 @@ public partial class AdminPanel_Reports_HospitalWiseDateWiseExpenseList_Hospital
     #endregion 21.4 SetReportParameter
 
     #endregion 21.0 reports
-    #region 19.0 Export Data
 
-    #region 19.1 Excel Export Button Click Event
-
-    protected void lbtnExport_Click(object sender, EventArgs e)
-    {
-        LinkButton lbtn = (LinkButton)(sender);
-        String ExportType = lbtn.CommandArgument.ToString();
-        #region Parameters
-
-        SqlDateTime FromDate = SqlDateTime.Null;
-        SqlDateTime ToDate = SqlDateTime.Null;
-        SqlInt32 HospitalID = SqlInt32.Null;
-
-        #endregion Parameters
-
-        #region Gather Data
-
-        if (dtpFromDate.Text.Trim() != String.Empty)
-            FromDate = Convert.ToDateTime(dtpFromDate.Text);
-
-        if (dtpFromDate.Text.Trim() != String.Empty)
-            ToDate = Convert.ToDateTime(dtpToDate.Text);
-        if (ddlHospitalID.SelectedIndex > 0)
-            HospitalID = Convert.ToInt32(ddlHospitalID.SelectedValue);
-
-        #endregion Gather Data
-
-        ACC_ExpenseBAL balACC_Expense = new ACC_ExpenseBAL();
-
-        dtACC_Expense = balACC_Expense.HospitalWiseExpense(HospitalID, FromDate, ToDate);
-        if (dtACC_Expense != null && dtACC_Expense.Rows.Count > 0)
-        {
-            ExportReport(ExportType);
-        }
-    }
-
-    private void ExportReport(string format)
-    {
-        try
-        {
-            string mimeType, encoding, extension;
-            Microsoft.Reporting.WebForms.Warning[] warnings;
-            string[] streamIds;
-
-            byte[] bytes = rvHospitalWiseExpenseList.LocalReport.Render(format,
-                                                        null,
-                                                        out mimeType,
-                                                        out encoding,
-                                                        out extension,
-                                                        out streamIds,
-                                                        out warnings);
-
-            Response.Clear();
-            Response.ContentType = mimeType;
-            Response.AddHeader("Content-Disposition", "attachment; filename=report." + extension);
-            Response.BinaryWrite(bytes);
-            Response.End();
-
-        }
-        catch (Exception ex)
-        {
-            ucMessage.ShowError(format + " is Not Correct Format");
-        }
-
-    }
-
-    #endregion 19.1 Excel Export Button Click Event
-
-    #endregion 19.0 Export Data
+ 
 }

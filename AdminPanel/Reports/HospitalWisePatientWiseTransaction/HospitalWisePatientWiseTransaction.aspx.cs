@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Reporting.WebForms;
+using GNForm3C.BAL;
 
 public partial class AdminPanel_Reports_RPT_ACC_GNTransaction_RPT_ACC_GNTransactionPatientReceipt : System.Web.UI.Page
 {
@@ -66,9 +67,55 @@ public partial class AdminPanel_Reports_RPT_ACC_GNTransaction_RPT_ACC_GNTransact
 
     #endregion 14.0 DropDownList
 
-    #region 18.0 Export Data
+    #region 15.0 Search
 
-    #region 18.1 Excel Export Button Click Event
+    #region 15.1 Button Search Click Event
+
+    protected void btnSearch_Click(object sender, EventArgs e)
+    {
+     
+
+    }
+
+    #endregion 15.1 Button Search Click Event
+
+    #region 15.2 Search Function
+
+    private void Search()
+    {
+        #region Parameters
+
+
+        #endregion Parameters
+
+        #region Gather Data
+
+
+        #endregion Gather Data
+     
+
+
+    }
+
+    #endregion 15.2 Search Function
+
+    #endregion 15.0 Search
+
+    #region 16.0 Repeater Events
+
+    #region 16.1 Item Command Event
+
+    protected void rpData_ItemCommand(object source, RepeaterCommandEventArgs e)
+    {
+    }
+
+    #endregion 16.1 Item Command Event
+
+    #endregion 16.0 Repeater Events
+
+    #region 17.0 Export Data
+
+    #region 17.1 Excel Export Button Click Event
 
     private void ExportReport(string format)
     {
@@ -99,13 +146,38 @@ public partial class AdminPanel_Reports_RPT_ACC_GNTransaction_RPT_ACC_GNTransact
 
     }
 
-    #endregion 18.1 Excel Export Button Click Event
+    #endregion 17.1 Excel Export Button Click Event
 
-    #endregion 18.0 Export Data
+    #endregion 17.0 Export Data
 
-    #region 22.0 REPORT
+    #region 18.0 Cancel Button Event
 
-    #region  22.1  ShowReport
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        ClearControls();
+    }
+
+    #endregion 18.0 Cancel Button Event
+
+    #region 19.0 ClearControls 
+
+    private void ClearControls()
+    {
+
+    }
+
+    #endregion 19.0 ClearControls
+
+    #region 20.0 SetDefaultDate
+    private void SetDefaultDates()
+    {
+
+    }
+    #endregion 20.0 SetDefaultDate
+
+    #region 21.0 REPORT
+
+    #region  21.1  ShowReport
 
     protected void ShowReport()
     {
@@ -128,9 +200,9 @@ public partial class AdminPanel_Reports_RPT_ACC_GNTransaction_RPT_ACC_GNTransact
         }
     }
 
-    #endregion 22.1 ShowReport 
+    #endregion 21.1 ShowReport 
 
-    #region 22.2 FillDataSet
+    #region 21.2 FillDataSet
 
     protected void FillDataSet(DataTable dtPatientReceipt)
     {
@@ -194,9 +266,9 @@ public partial class AdminPanel_Reports_RPT_ACC_GNTransaction_RPT_ACC_GNTransact
         this.rvPatientReceipt.LocalReport.DataSources.Add(new ReportDataSource("dtPatient", (DataTable)objdsACC_GNTransaction.dtPatientReceipt));
         this.rvPatientReceipt.LocalReport.Refresh();
     }
-    #endregion 22.2 FillDataSet
+    #endregion 21.2 FillDataSet
 
-    #region 22.3 SetReportParamater
+    #region 21.3 SetReportParamater
     protected void SetReportParamater()
     {
         String ReportTitle = "Shree G.T.Sheth Charitable Foundation";
@@ -210,7 +282,7 @@ public partial class AdminPanel_Reports_RPT_ACC_GNTransaction_RPT_ACC_GNTransact
         this.rvPatientReceipt.LocalReport.SetParameters(new ReportParameter[] { rptReportTitle, rptReportSubTitle, rptPrintDate });
 
     }
-    #endregion 22.3 SetReportParamater 
+    #endregion 21.3 SetReportParamater 
 
-    #endregion 22.0 REPORT
+    #endregion 21.0 REPORT
 }

@@ -305,6 +305,7 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
                     if (balACC_GNTransaction.UpdateDischargeAndTotalDays(Convert.ToInt32(e.CommandArgument)))
                     {
                         ucMessage.ShowSuccess(CommonMessage.RecordUpdated());
+           
 
                         if (ViewState["CurrentPage"] != null)
                         {
@@ -532,7 +533,7 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
 
     private void ClearControls()
     {
-        ddlPatientID.Text = String.Empty;
+        ddlPatientID.SelectedIndex = 0;
         //ddlTreatmentID.SelectedIndex = 0;
         txtAmount.Text = String.Empty;
         //txtSerialNo.Text = String.Empty;
