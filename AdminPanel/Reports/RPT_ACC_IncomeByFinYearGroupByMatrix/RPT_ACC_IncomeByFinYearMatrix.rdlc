@@ -17,10 +17,6 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="IncomeID">
-          <DataField>IncomeID</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
         <Field Name="FinYearName">
           <DataField>FinYearName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -44,8 +40,8 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsACC_Income</rd:DataSetName>
-        <rd:SchemaPath>E:\gn\BHAVIN_GNWebForm3C_Code_20230213_0731PM\GNWebForm3C_CodeB\App_Code\DataSet\dsACC_Income.xsd</rd:SchemaPath>
-        <rd:TableName>ACC_Income</rd:TableName>
+        <rd:SchemaPath>E:\gn\BHAVIN_GNWebForm3C_Code_20230213_0731PM\GNWebForm3C_CodeB\App_Code\DataSet\ACC_Income\dsACC_Income.xsd</rd:SchemaPath>
+        <rd:TableName>dtACC_Income</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -325,7 +321,6 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>dtACC_IncomeBYFinYear</DataSetName>
-            <Top>0cm</Top>
             <Height>0.75in</Height>
             <Width>3.75in</Width>
             <Style>

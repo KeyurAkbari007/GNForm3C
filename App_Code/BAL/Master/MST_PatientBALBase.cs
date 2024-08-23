@@ -83,10 +83,10 @@ public class MST_PatientBALBase
 
     #region Report
 
-    public DataTable RPT_PatientIDCard()
+    public DataTable RPT_PatientIDCard(SqlInt32 PatientID)
     {
-        MST_PatientBAL dalMST_GNPatient = new MST_PatientBAL();
-        return dalMST_GNPatient.RPT_PatientIDCard();
+        MST_PatientDAL dalMST_GNPatient = new MST_PatientDAL();
+        return dalMST_GNPatient.RPT_PatientIDCard(PatientID);
     }
 
     #endregion Report

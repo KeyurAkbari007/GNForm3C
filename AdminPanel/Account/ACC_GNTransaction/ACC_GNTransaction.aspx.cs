@@ -19,7 +19,7 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
     Int32 PageDisplaySize = CV.PageDisplaySize;
     Int32 DisplayIndex = CV.DisplayIndex;
     private DataTable dtACC_PAtient = new DataTable("dtACC_Patient");
-    private dsGN_Transaction objdsACC_Expense = new dsGN_Transaction();
+    private dsACC_GNTransaction objdsACC_Expense = new dsACC_GNTransaction();
 
     #endregion 11.0 Variables
 

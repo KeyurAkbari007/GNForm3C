@@ -19,6 +19,8 @@ using System.Configuration;
 using System.Data.OleDb;
 using System.Web.UI;
 using System.Security.Cryptography;
+using System.Drawing.Imaging;
+using ZXing;
 
 namespace GNForm3C
 {
@@ -1750,13 +1752,52 @@ namespace GNForm3C
             return Convert.ToInt32(DateTime.Parse(HourFormat).Hour) * 60 + Convert.ToInt32(DateTime.Parse(HourFormat).Minute);
         }
 
-    
+
 
         #endregion Common
 
-      
+        #region GenerateBarcode
+        public static byte[] GenerateBarcode(string data)
+        {
+            var barcodeWriter = new BarcodeWriter
+            {
+                Format = BarcodeFormat.CODE_128, // Specify the barcode format
+                Options = new ZXing.Common.EncodingOptions
+                {
+                    Height = 100,
+                    Width = 300
+                }
+            };
 
-        
+            using (Bitmap bitmap = barcodeWriter.Write(data))
+            {
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    bitmap.Save(ms, ImageFormat.Png);
+                    return ms.ToArray(); // Return the barcode as a byte array
+                }
+            }
+        }
+        #endregion
+
+
+        #region convert to png bytes
+        public static byte[] ConvertImagePathToPngBytes(string relativePath)
+        {
+            // Step 1: Get the physical path from the relative path
+            string physicalPath = HttpContext.Current.Server.MapPath(relativePath);
+
+            // Step 2: Read the image and convert it to PNG format
+            using (MemoryStream outputStream = new MemoryStream())
+            {
+                using (System.Drawing.Image image = System.Drawing.Image.FromFile(physicalPath))
+                {
+                    image.Save(outputStream, ImageFormat.Png);
+                    return outputStream.ToArray();
+                }
+            }
+        }
+        #endregion convert to png bytes
 
 
         #region Get CSS Class

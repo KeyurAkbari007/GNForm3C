@@ -38,11 +38,11 @@ public partial class AdminPanel_Reports_RPT_ACC_IncomeByFinYearGroupByMatrix_RPT
     {
         foreach (DataRow dr in dtACC_Income.Rows)
         {
-            dsACC_Income.ACC_IncomeRow drACC_Income = objAcc_income.ACC_Income.NewACC_IncomeRow();
-            if (!dr["IncomeID"].Equals(System.DBNull.Value))
-            {
-                drACC_Income.IncomeID = Convert.ToInt32(dr["IncomeID"]);
-            }
+            dsACC_Income.dtACC_IncomeRow drACC_Income = objAcc_income.dtACC_Income.NewdtACC_IncomeRow();
+            //if (!dr["IncomeID"].Equals(System.DBNull.Value))
+            //{
+            //    drACC_Income.IncomeID = Convert.ToInt32(dr["IncomeID"]);
+            //}
             if (!dr["FinYearName"].Equals(System.DBNull.Value))
             {
                 drACC_Income.FinYearName = Convert.ToString(dr["FinYearName"]);
@@ -63,12 +63,12 @@ public partial class AdminPanel_Reports_RPT_ACC_IncomeByFinYearGroupByMatrix_RPT
             {
                 drACC_Income.IncomeDate = Convert.ToDateTime(dr["IncomeDate"]).ToString(CV.DefaultDateFormat);
             }
-            objAcc_income.ACC_Income.Rows.Add(drACC_Income);
+            objAcc_income.dtACC_Income.Rows.Add(drACC_Income);
 
         }
         SetReportParameters();
         this.rvIncomeReport.LocalReport.DataSources.Clear();
-        this.rvIncomeReport.LocalReport.DataSources.Add(new ReportDataSource("dtACC_IncomeBYFinYear", (DataTable)objAcc_income.ACC_Income));
+        this.rvIncomeReport.LocalReport.DataSources.Add(new ReportDataSource("dtACC_IncomeBYFinYear", (DataTable)objAcc_income.dtACC_Income));
         this.rvIncomeReport.LocalReport.Refresh();
     }
     #endregion FillDataSet

@@ -197,8 +197,9 @@ namespace GNForm3C
         public static string PasswordWrong = "Old Password is Wrong!";
         public static string DefaultIconImageUrl = "";
         public static string ErrorAccessDeniedPageURL = "~/AdminPanel/Common/Error401.aspx";
+        public static string DefaultNoImagePath = "~/Default/Images/profile_user.jpg";
 
-        
+
         #endregion Common URL
 
         #region Default Images

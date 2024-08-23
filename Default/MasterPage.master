@@ -466,6 +466,16 @@
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_HospitalWise_FinYearWise_IncomeExpense/RPT_FinYearWiseHospitalWiseIncomeExpense.aspx") %>' class="nav-link ">
                                             <span class="title">FinYearWise HospitalWise IncomeExpense</span>
                                         </a>
+                                    </li>  
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_MST_Patient/RPT_PatientIDCard.aspx") %>' class="nav-link ">
+                                            <span class="title">Patient Card</span>
+                                        </a>
+                                    </li>  
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/Reports/RPT_ACC_Ledger/RPT_ACC_Ledger.aspx") %>' class="nav-link ">
+                                            <span class="title">Ledger</span>
+                                        </a>
                                     </li>
 
                                 </ul>

@@ -13,7 +13,7 @@ using GNForm3C.BAL;
 public partial class AdminPanel_Reports_RPT_ACC_GNTransaction_RPT_ACC_GNTransactionPatientReceipt : System.Web.UI.Page
 {
     #region 11.0 Local Variable 
-    private dsGN_Transaction objdsACC_GNTransaction = new dsGN_Transaction();
+    private dsACC_GNTransaction objdsACC_GNTransaction = new dsACC_GNTransaction();
     #endregion 11.0 Local Variable
 
     #region 12.0 Page Load Event
@@ -208,7 +208,7 @@ public partial class AdminPanel_Reports_RPT_ACC_GNTransaction_RPT_ACC_GNTransact
     {
         foreach (DataRow dr in dtPatientReceipt.Rows)
         {
-            dsGN_Transaction.dtPatientReceiptRow drPatientReceipt = objdsACC_GNTransaction.dtPatientReceipt.NewdtPatientReceiptRow();
+            dsACC_GNTransaction.dtPatientReceiptRow drPatientReceipt = objdsACC_GNTransaction.dtPatientReceipt.NewdtPatientReceiptRow();
 
             if (!dr["PatientName"].Equals(System.DBNull.Value))
                 drPatientReceipt.PatientName = Convert.ToString(dr["PatientName"]);
@@ -252,7 +252,7 @@ public partial class AdminPanel_Reports_RPT_ACC_GNTransaction_RPT_ACC_GNTransact
             if (!dr["TreatmentDate"].Equals(System.DBNull.Value))
                 drPatientReceipt.TreatmentDate = Convert.ToDateTime(dr["TreatmentDate"]);
             if (!dr["FinYearName"].Equals(System.DBNull.Value))
-                drPatientReceipt.FinYear = Convert.ToString(dr["FinYearName"]);
+                drPatientReceipt.FinYearName = Convert.ToString(dr["FinYearName"]);
             if (!dr["Deposite"].Equals(System.DBNull.Value))
                 drPatientReceipt.Deposite = Convert.ToDecimal(dr["Deposite"]);
 

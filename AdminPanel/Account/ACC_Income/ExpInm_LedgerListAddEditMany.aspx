@@ -123,20 +123,22 @@
                                                             <th class="text-center" style="width: 150px;">
                                                                 <asp:Label ID="lblIncomeDate" runat="server" Text="IncomeDate"></asp:Label>
                                                             </th>
-                                                            <th class="text-center" style="width: 150px;">
-                                                                <asp:Label ID="lblAmount" runat="server" Text="Amount"></asp:Label>
-                                                            </th>
-
-                                                            <th>
-                                                                <asp:Label ID="lblNote" runat="server" Text=" Note"></asp:Label>
-                                                            </th>
-                                                            <th>
-                                                                <asp:Label ID="lbhRemarks" runat="server" Text="Remarks"></asp:Label>
-                                                            </th>
 
                                                             <th>
                                                                 <asp:Label ID="lblincometypeddl" runat="server" Text="IncomeType"></asp:Label>
                                                             </th>
+
+                                                            <th class="text-center" style="width: 150px;">
+                                                                <asp:Label ID="lblAmount" runat="server" Text="Amount"></asp:Label>
+                                                            </th>
+                                                            <th>
+                                                                <asp:Label ID="lbhRemarks" runat="server" Text="Remarks"></asp:Label>
+                                                            </th>
+                                                            <th>
+                                                                <asp:Label ID="lblNote" runat="server" Text=" Note"></asp:Label>
+                                                            </th>
+
+
                                                         </tr>
                                                     </thead>
                                                     <%-- END Table Header --%>
@@ -155,9 +157,15 @@
                                                                         <%#Container.ItemIndex+1 %>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="txtIncomeDate" CssClass="form-control" runat="server"
-                                                                            Text='<%# Bind("IncomeDate", "{0:yyyy-MM-dd}") %>'
-                                                                            PlaceHolder="Enter Income Date" type="date"></asp:TextBox>
+                                                                        <div class="input-group input-medium date date-picker" data-date-format='<%=GNForm3C.CV.DefaultHTMLDateFormat.ToString()%>'>
+                                                                            <asp:TextBox ID="dtpIncomeDate" CssClass="form-control" runat="server" placeholder="Income Date" Text='<%#Eval("IncomeDate", "{0:dd-mm-yyyy}") %>'></asp:TextBox>
+                                                                            <span class="input-group-btn">
+                                                                                <button class="btn default" type="button"><i class="fa fa-calendar"></i></button>
+                                                                            </span>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <asp:DropDownList ID="ddlIncomeTypeID" AutoPostBack="True" Enabled="false" CssClass="form-control select2me" runat="server"></asp:DropDownList>
                                                                     </td>
                                                                     <td>
                                                                         <asp:TextBox ID="txtAmount" CssClass="form-control" runat="server" Text='<%#Eval("Amount") %>' PlaceHolder="Enter Amount"></asp:TextBox>
@@ -167,12 +175,10 @@
                                                                         <asp:TextBox ID="txtRemarks" CssClass="form-control" runat="server" Text='<%#Eval("Remarks") %>' PlaceHolder="Enter Remarks"></asp:TextBox>
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="txtNote" CssClass="form-control" runat="server" Text='<%#Eval("Note") %>' PlaceHolder="Enter Remarks"></asp:TextBox>
+                                                                        <asp:TextBox ID="txtNote" CssClass="form-control" runat="server" Text='<%#Eval("Note") %>' PlaceHolder="Enter Note"></asp:TextBox>
                                                                     </td>
 
-                                                                    <td>
-                                                                        <asp:DropDownList ID="ddlIncomeTypeID" AutoPostBack="True" Enabled="false" CssClass="form-control select2me" runat="server"></asp:DropDownList>
-                                                                    </td>
+
                                                                 </tr>
 
                                                             </ItemTemplate>

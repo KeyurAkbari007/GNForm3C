@@ -6,6 +6,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using GNForm3C.ENT;
+using System.Web.Util;
 
 namespace GNForm3C.DAL
 {
@@ -270,12 +271,13 @@ namespace GNForm3C.DAL
 
         #region Report
 
-        public DataTable RPT_PatientIDCard()
+        public DataTable RPT_PatientIDCard(SqlInt32 PatientID)
         {
             try
             {
                 SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
                 DbCommand dbCMD = sqlDB.GetStoredProcCommand("PP_MST_PatientList");
+                sqlDB.AddInParameter(dbCMD, "@PatientID", SqlDbType.Int, PatientID);
 
                 DataTable dtACC_Expense = new DataTable("PP_MST_PatientList");
 
