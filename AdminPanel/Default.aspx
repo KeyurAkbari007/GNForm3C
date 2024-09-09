@@ -765,5 +765,37 @@
 
 </asp:Content>
 <asp:Content ID="Content5" ContentPlaceHolderID="cphScripts" runat="Server">
+      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        // Load the Google Charts library
+        google.charts.load('current', { 'packages': ['corechart'] });
+
+        // Set a callback function to run when the Google Charts library is loaded
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Create the data table
+            var data = google.visualization.arrayToDataTable([
+                ['Element', 'Density', { role: 'style' }],
+                ['Copper', 8.94, '#b87333'], // RGB color
+                ['Silver', 10.49, 'silver'],
+                ['Gold', 19.30, 'gold'],
+                ['Platinum', 21.45, 'color: #e5e4e2'] // CSS color
+            ]);
+
+            // Set chart options
+            var options = {
+                title: 'Density of Precious Metals, in g/cm^3',
+                legend: { position: 'none' },
+                bars: 'horizontal' // Switch to vertical bars
+            };
+
+            // Create the chart object and pass the data and options
+            var chart = new google.visualization.BarChart(document.getElementById('chart_div'));
+
+            // Draw the chart
+            chart.draw(data, options);
+        }
+    </script>
 </asp:Content>
 

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Newtonsoft.Json;
+using System.Activities.Statements;
 
 public partial class AdminPanel_Dashboard2 : System.Web.UI.Page
 {
@@ -32,6 +34,7 @@ public partial class AdminPanel_Dashboard2 : System.Web.UI.Page
             #region 11.1 DropDown List Fill Section
 
             FillDropDownList();
+          
 
             #endregion 11.1 DropDown List Fill Section
 
@@ -88,6 +91,7 @@ public partial class AdminPanel_Dashboard2 : System.Web.UI.Page
     {
         //upDashboard.Visible = true;
         Search(1);
+        ShowChart();
 
     }
     #endregion 12.0 Search
@@ -216,5 +220,25 @@ public partial class AdminPanel_Dashboard2 : System.Web.UI.Page
     #endregion 14.1 Fill DropDownList
 
     #endregion 14.0 DropDownList
+
+    #region Chart
+
+    private void ShowChart()
+    {
+        var chartData = GetChartData();
+        var jsonData = JsonConvert.SerializeObject(chartData);
+        ClientScript.RegisterStartupScript(this.GetType(), "chartData", "var chartData = " + jsonData + ";", true);
+    }
+    private DataTable GetChartData()
+    {
+        SqlInt32 FinYearID = Convert.ToInt32(ddlFinYearID.SelectedValue);
+
+        MST_DSB2BAL balMST_DSB2 = new MST_DSB2BAL();
+        DataTable dtchartData = balMST_DSB2.IncomeExpenseSumHospitalWise(FinYearID);
+
+
+        return dtchartData;
+    }
+    #endregion Chart
 
 }

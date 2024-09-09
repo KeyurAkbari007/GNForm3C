@@ -90,4 +90,11 @@ public class MST_PatientBALBase
     }
 
     #endregion Report
+    #region GetPatientAutoComplete
+    public DataTable GetPatientAutoComplete(SqlString txtSearch, SqlString txtContext)
+    {
+        MST_PatientDAL dal = new MST_PatientDAL();
+        return dal.GetPatientAutoComplete(txtSearch, txtContext);
+    }
+    #endregion GetPatientAutoComplete
 }

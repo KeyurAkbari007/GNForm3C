@@ -190,9 +190,11 @@ namespace GNForm3C.BAL
             return dalMST_Patient.InsertPatient(entMST_Patient);
         }
 
-        #endregion
+        #endregion
 
         #endregion InsertOperationPatient
+
+  
 
     }
 

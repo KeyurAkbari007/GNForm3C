@@ -67,7 +67,7 @@
             margin: 0 0 0 0 !important;
         }
     </style>
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
 </head>
 <!-- END HEAD -->
@@ -289,13 +289,13 @@
                                     <li>
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Dashboard3.aspx") %>' class="kt-menu__link ">
                                             <i class="kt-menu__link-icon flaticon2-architecture-and-city"></i>
-                                            <span class="kt-menu__link-text">Dashboard 2</span>
+                                            <span class="kt-menu__link-text">Dashboard 3</span>
                                         </a>
                                     </li>
                                     <li>
                                         <a href='<%=ResolveClientUrl("~/AdminPanel/Dashboard2.aspx") %>' class="kt-menu__link ">
                                             <i class="kt-menu__link-icon flaticon2-architecture-and-city"></i>
-                                            <span class="kt-menu__link-text">Dashboard Using DDl</span>
+                                            <span class="kt-menu__link-text">Dashboard Using DDl MST 2</span>
                                         </a>
                                     </li>
                                 </ul>
@@ -477,6 +477,23 @@
                                             <span class="title">Ledger</span>
                                         </a>
                                     </li>
+
+                                </ul>
+                            </li> 
+                            <li class="nav-item">
+                                <a href="javascript:;" class="nav-link nav-toggle">
+                                    <i class="icon-wrench"></i>
+                                    <span class="title">DataTree</span>
+                                    <span class="arrow"></span>
+                                </a>
+
+                                <ul class="sub-menu" style="display: none;">
+                                    <li class="nav-item  ">
+                                        <a href='<%=ResolveClientUrl("~/AdminPanel/DataTree/HospitalWiseIncome/HospitalWiseIncome.aspx") %>' class="nav-link ">
+                                            <span class="title">HospitalWiseIncome</span>
+                                        </a>
+                                    </li>
+                   
 
                                 </ul>
                             </li>

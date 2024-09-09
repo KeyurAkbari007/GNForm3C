@@ -198,5 +198,39 @@ namespace GNForm3C.DAL
             }
         }
         #endregion Select
+
+        #region IncomeExpenseSumHospitalWise
+        public DataTable IncomeExpenseSumHospitalWise(SqlInt32 FinYearID)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_DSB_IncomeExpenseSumHospitalWise");
+                //DbCommand dbCMD = sqlDB.GetStoredProcCommand("GetIncomePivot");
+
+                DataTable dtCount = new DataTable("PR_DSB_IncomeExpenseSumHospitalWise");
+                sqlDB.AddInParameter(dbCMD, "@FinYearID", SqlDbType.Int, FinYearID);
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtCount);
+
+                return dtCount;
+            }
+            catch (SqlException sqlex)
+            {
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+        #endregion  IncomeExpenseSumHospitalWise
     }
 }

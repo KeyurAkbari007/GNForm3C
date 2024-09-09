@@ -193,7 +193,8 @@
 
                                                     <asp:LinkButton ID="btnAdd" runat="server" OnClick="btnAdd_Click" SkinID="lbtnAddRow" Visible="true">
                                                     </asp:LinkButton>
-                                                    <asp:LinkButton ID="btnSave" runat="server" CssClass="btn green" SkinID="btnSave" OnClick="btnSave_Click" Text="Save" />
+                                                    <asp:LinkButton ID="btnSaveDt" runat="server" CssClass="btn green" SkinID="btnSave" OnClick="btnSave_ClickDatatable" Text="SaveDatatable" />
+                                                    <asp:LinkButton ID="btnSave" runat="server" CssClass="btn green" SkinID="btnSave" OnClick="btnSave_Click" Text="SaveXML" />
                                                     <asp:HyperLink ID="hlCancel" runat="server" SkinID="hlCancel" NavigateUrl="~/AdminPanel/Account/ACC_Income/ACC_IncomeList.aspx"></asp:HyperLink>
                                                 </div>
                                             </div>

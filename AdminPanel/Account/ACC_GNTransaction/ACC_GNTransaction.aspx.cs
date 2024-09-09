@@ -9,6 +9,9 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using System.Data;
+using System.Web.Services;
+using System.Web.Script.Services;
+
 
 public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : System.Web.UI.Page
 {
@@ -88,7 +91,7 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
         CommonFillMethods.FillDropDownListHospitalID(ddlHospitalID);
         CommonFillMethods.FillSingleDropDownListFinYearID(ddlFinYearID);
         CommonFillMethods.FillDropDownListReceiptTypeID(ddlReceiptTypeID);
-        CommonFillMethods.FillDropDownListPatientID(ddlPatientID);
+        //CommonFillMethods.FillDropDownListPatientID(ddlPatientID);
 
         CommonFunctions.GetDropDownPageSize(ddlPageSizeBottom);
         ddlPageSizeBottom.SelectedValue = PageRecordSize.ToString();
@@ -140,8 +143,16 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
         //if (txtPatient.Text.Trim() != String.Empty)
         //    PatientID = txtPatient.Text.Trim();
 
-        if (ddlPatientID.SelectedIndex > 0)
-            PatientID = Convert.ToInt32(ddlPatientID.SelectedValue);
+        //if (ddlPatientID.SelectedIndex > 0)
+        //    PatientID = Convert.ToInt32(ddlPatientID.SelectedValue);
+
+        // Use hidden field value for PatientID
+        string selectedPatientID = hdnSelectedPatientID.Value;
+        int patientID; // Declare the variable separately
+        if (int.TryParse(selectedPatientID, out patientID) && txtACEPatientName.Text.Trim() != String.Empty)
+            PatientID = patientID;
+
+
 
         if (txtAmount.Text.Trim() != String.Empty)
             Amount = Convert.ToDecimal(txtAmount.Text.Trim());
@@ -437,8 +448,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
         SqlInt32 ReceiptTypeID = SqlInt32.Null;
         Int32 TotalRecords = 0;
 
-        if (ddlPatientID.Text.Trim() != String.Empty)
-            Patient = Convert.ToInt32(ddlPatientID.Text.Trim());
+        //if (ddlPatientID.Text.Trim() != String.Empty)
+        //    Patient = Convert.ToInt32(ddlPatientID.Text.Trim());
 
         //if (ddlTreatmentID.SelectedIndex > 0)
         //    TreatmentID = Convert.ToInt32(ddlTreatmentID.SelectedValue);
@@ -533,7 +544,8 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
 
     private void ClearControls()
     {
-        ddlPatientID.SelectedIndex = 0;
+        //ddlPatientID.SelectedIndex = 0;
+        txtACEPatientName.Text = String.Empty;
         //ddlTreatmentID.SelectedIndex = 0;
         txtAmount.Text = String.Empty;
         //txtSerialNo.Text = String.Empty;
@@ -557,7 +569,5 @@ public partial class AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction : Sy
     }
 
     #endregion 22.0 ClearControls
-
-
 
 }

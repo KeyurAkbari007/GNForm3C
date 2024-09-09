@@ -304,6 +304,46 @@ namespace GNForm3C.DAL
 
         #endregion Report
 
+        #region search opreration using auto complete
+
+        public DataTable GetPatientAutoComplete(SqlString txtSearch, SqlString txtContext)
+        {
+            try
+            {
+                SqlDatabase sqlDB = new SqlDatabase(myConnectionString);
+                DbCommand dbCMD = sqlDB.GetStoredProcCommand("PR_MST_Patient_AutoComplete");
+
+                // Add parameters
+                sqlDB.AddInParameter(dbCMD, "@TxtSearch", DbType.String, txtSearch);
+                sqlDB.AddInParameter(dbCMD, "@TxtContext", DbType.String, txtContext);
+
+                DataTable dtMST_Patient = new DataTable("PR_MST_Patient_AutoComplete");
+
+                DataBaseHelper DBH = new DataBaseHelper();
+                DBH.LoadDataTable(sqlDB, dbCMD, dtMST_Patient);
+
+                return dtMST_Patient;
+            }
+            catch (SqlException sqlex)
+            {
+                // Handle SQL exception
+                Message = SQLDataExceptionMessage(sqlex);
+                if (SQLDataExceptionHandler(sqlex))
+                    throw;
+                return null;
+            }
+            catch (Exception ex)
+            {
+                // Handle general exception
+                Message = ExceptionMessage(ex);
+                if (ExceptionHandler(ex))
+                    throw;
+                return null;
+            }
+        }
+
+        #endregion  search opreration using auto complete
+
 
 
     }

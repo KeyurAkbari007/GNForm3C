@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.Reporting.WebForms;
+using System.Xml;
 
 public partial class AdminPanel_Reports_RPT_ACC_IncomeByFinYearGroupByMatrix_RPT_ACC_IncomeByFinYearGroupByMatrix : System.Web.UI.Page
 {
@@ -15,12 +16,13 @@ public partial class AdminPanel_Reports_RPT_ACC_IncomeByFinYearGroupByMatrix_RPT
     DataTable dtACC_Income = new DataTable();
     private dsACC_Income objAcc_income = new dsACC_Income();
     #endregion private variable     
-
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)
         {
             ShowReport();
+          
+
         }
     }
     #region ShowReport
@@ -81,4 +83,9 @@ public partial class AdminPanel_Reports_RPT_ACC_IncomeByFinYearGroupByMatrix_RPT
         this.rvIncomeReport.LocalReport.SetParameters(new ReportParameter[] { rptReportTitle, rptReportTitle });
     }
     #endregion SetReportParameters
+
+  
+
+
+
 }

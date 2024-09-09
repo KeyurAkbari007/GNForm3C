@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default/MasterPage.master" AutoEventWireup="true" CodeFile="ACC_GNTransaction.aspx.cs" Inherits="AdminPanel_Account_ACC_GNTransaction_ACC_GNTransaction" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
@@ -54,10 +56,32 @@
                                             <span class="input-group-addon">
                                                 <i class="fa fa-search"></i>
                                             </span>
-                                            <asp:DropDownList ID="ddlPatientID" CssClass="form-control select2me" runat="server"></asp:DropDownList>
+                                            <asp:TextBox ID="txtACEPatientName" CssClass="form-control" runat="server" PlaceHolder="Enter Patient"></asp:TextBox>
+                                            <asp:AutoCompleteExtender
+                                                ID="acePatientName"
+                                                runat="server"
+                                                TargetControlID="txtACEPatientName"
+                                                ServiceMethod="GetPatientList"
+                                                ServicePath="~/WebServices/WebService_MST_Patient.asmx"
+                                                MinimumPrefixLength="2"
+                                                CompletionSetCount="10"
+                                                OnClientItemSelected="ClientItemSelectedPatient">
+                                            </asp:AutoCompleteExtender>
+                                            <asp:HiddenField ID="hdnSelectedPatientID" runat="server" />
+
                                         </div>
                                     </div>
                                 </div>
+                            <%--    <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-search"></i>
+                                            </span>
+                                            <asp:DropDownList ID="ddlPatientID" CssClass="form-control select2me" runat="server"></asp:DropDownList>
+                                        </div>
+                                    </div>
+                                </div>--%>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
@@ -228,7 +252,7 @@
                 <div class="col-md-12">
                     <ucMessage:ShowMessage ID="ucMessage" runat="server" ViewStateMode="Disabled" />
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-12">
                         <!-- BEGIN EXAMPLE TABLE PORTLET-->
@@ -348,7 +372,7 @@
                                                                 <td>
                                                                     <%#Eval("ReceiptNo") %>
                                                                 </td>
-                                                                <td class="text-center "  style="width: 150px;">
+                                                                <td class="text-center " style="width: 150px;">
                                                                     <%#Eval("Date", GNForm3C.CV.DefaultDateFormatForGrid) %>
                                                                 </td>
                                                                 <td>
@@ -377,11 +401,10 @@
                                                                 </td>
                                                                 <td class="text-nowrap text-center">
                                                                     <asp:HyperLink ID="hlView" SkinID="View" NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionView.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' data-target="#viewiFrameReg" data-toggle="modal" runat="server"></asp:HyperLink>
-                                                                      <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionAddEdit.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' runat="server"></asp:HyperLink>
-                                                                 
+                                                                    <asp:HyperLink ID="hlEdit" SkinID="Edit" NavigateUrl='<%# "~/AdminPanel/Account/ACC_GNTransaction/ACC_GNTransactionAddEdit.aspx?TransactionID=" + GNForm3C.CommonFunctions.EncryptBase64(Eval("TransactionID").ToString()) %>' runat="server"></asp:HyperLink>
+
                                                                     <asp:LinkButton ID="lbtDelete" runat="server"
                                                                         SkinID="Delete"
-                                                                      
                                                                         OnClientClick="javascript:return confirm('Are you sure you want to update date of discharge?');"
                                                                         CommandName="UpdateDischarge"
                                                                         CommandArgument='<%# Eval("TransactionID") %>'
@@ -480,7 +503,9 @@
         });
 
         SearchGridUI('<%=btnSearch.ClientID%>', 'sample_1', 1);
+
+        function ClientItemSelectedPatient(sender, e) {
+            $(<%= hdnSelectedPatientID.ClientID %>).val(e.get_value().split(' - ')[0]);
+     }
     </script>
 </asp:Content>
-
-
